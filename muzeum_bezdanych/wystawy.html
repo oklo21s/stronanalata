@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Wystawy Muzeum Miasta Lipowo — ekspozycja stała i wystawy czasowe. Projekt demonstracyjny, marka fikcyjna, dane przykładowe."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#1d1b39" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <title>Wystawy — Muzeum Miasta Lipowo (projekt demonstracyjny)</title>
+    <script>
+      document.documentElement.classList.add("js");
+      // Motyw ustawiamy przed renderem, żeby nie było migotania. Zapamiętany wybór
+      // trzymamy w localStorage (to nie plik cookie), a bez wyboru słuchamy systemu.
+      try {
+        var storedTheme = localStorage.getItem("muzeum-theme");
+        if (storedTheme === "dark" || (!storedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.dataset.theme = "dark";
+        }
+      } catch (e) {}
+    </script>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#tresc">Przejdź do treści</a>
+
+    <div class="demo-ribbon" role="note">
+      <strong>Projekt demonstracyjny</strong> — „Muzeum Miasta Lipowo” to marka fikcyjna. Wszystkie treści to Dane przykładowe, a grafiki to wizualizacje koncepcyjne.
+    </div>
+
+    <header class="site-header" data-site-header>
+      <div class="wrap site-header__inner">
+        <a class="brand" href="./index.html" aria-label="Muzeum Miasta Lipowo — strona główna">
+          <span class="brand__name">Muzeum Miasta Lipowo</span>
+          <span class="brand__tag">muzeum miejskie</span>
+        </a>
+        <nav class="nav" aria-label="Główna nawigacja">
+          <ul class="nav__links">
+            <li><a href="./index.html">Start</a></li>
+            <li><a href="./wystawy.html" aria-current="page">Wystawy</a></li>
+            <li><a href="./wydarzenia.html">Wydarzenia</a></li>
+            <li><a href="./kolekcje.html">Kolekcje</a></li>
+            <li><a href="./zwiedzanie.html">Zwiedzanie</a></li>
+            <li><a href="./kontakt.html">Kontakt</a></li>
+          </ul>
+          <a class="button button--primary" href="./zwiedzanie.html#bilety">Bilety</a>
+          <button
+            class="theme-toggle"
+            type="button"
+            aria-pressed="false"
+            aria-label="Włącz tryb ciemny"
+            title="Zmień motyw (jasny / ciemny)"
+          >
+            <svg class="theme-toggle__moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+            <svg class="theme-toggle__sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"/></svg>
+          </button>
+          <button
+            class="menu-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="menu-mobilne"
+            aria-label="Otwórz menu"
+          >
+            <span class="menu-toggle__open"><i data-lucide="menu"></i></span>
+            <span class="menu-toggle__close"><i data-lucide="x"></i></span>
+          </button>
+        </nav>
+      </div>
+      <nav id="menu-mobilne" hidden aria-label="Menu mobilne">
+        <ul class="menu-mobile__links">
+          <li><a href="./index.html">Start</a></li>
+          <li><a href="./wystawy.html" aria-current="page">Wystawy</a></li>
+          <li><a href="./wydarzenia.html">Wydarzenia</a></li>
+          <li><a href="./kolekcje.html">Kolekcje</a></li>
+          <li><a href="./zwiedzanie.html">Zwiedzanie</a></li>
+          <li><a href="./kontakt.html">Kontakt</a></li>
+        </ul>
+        <a class="button button--primary" href="./zwiedzanie.html#bilety">Bilety</a>
+      </nav>
+    </header>
+
+    <main id="tresc">
+      <section class="section section--alt section--tight" aria-labelledby="wystawy-tytul">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow"><i data-lucide="frame"></i> Wystawy</p>
+            <h1 id="wystawy-tytul">Ekspozycja stała i wystawy czasowe</h1>
+            <p class="lead">
+              Przykładowy przegląd wystaw muzeum. Wszystkie tytuły, opisy i terminy
+              to Dane przykładowe, a grafiki — wizualizacje koncepcyjne.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- WYSTAWA STAŁA -->
+      <section class="section" aria-labelledby="stala-tytul">
+        <div class="wrap split">
+          <figure class="split__figure">
+            <img
+              src="./assets/wystawa-1-koncept.svg"
+              alt="Wizualizacja koncepcyjna wystawy stałej: abstrakcyjna kompozycja geometryczna na ciemnym tle"
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+          </figure>
+          <div>
+            <span class="tag"><i data-lucide="landmark"></i> Wystawa stała</span>
+            <h2 id="stala-tytul">Miasto i jego mieszkańcy</h2>
+            <p>
+              Główna opowieść muzeum o codzienności miasta na przestrzeni lat.
+              To przykładowy opis ekspozycji stałej na potrzeby projektu.
+            </p>
+            <ul class="checklist">
+              <li><i data-lucide="clock"></i> Dostępna w godzinach otwarcia muzeum</li>
+              <li><i data-lucide="footprints"></i> Sugerowany czas zwiedzania: przykładowy</li>
+              <li><i data-lucide="accessibility"></i> Trasa dostępna dla wózków</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- WYSTAWY CZASOWE -->
+      <section class="section section--alt" aria-labelledby="czasowe-tytul">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow"><i data-lucide="palette"></i> Na czas określony</p>
+            <h2 id="czasowe-tytul">Wystawy czasowe</h2>
+            <p class="lead">Prezentowane przez ograniczony czas — terminy przykładowe.</p>
+          </div>
+          <div class="grid grid--2">
+            <article class="tile tile--media tile--hover">
+              <div class="tile__thumb">
+                <img
+                  src="./assets/wystawa-2-koncept.svg"
+                  alt="Wizualizacja koncepcyjna wystawy: pasy i łuki w barwach muzeum"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                />
+              </div>
+              <div class="tile__body">
+                <span class="tag"><i data-lucide="palette"></i> Czynna — termin przykładowy</span>
+                <h3>Barwy i formy</h3>
+                <p>Przykładowa wystawa poświęcona sztuce nowoczesnej i jej językowi.</p>
+              </div>
+            </article>
+            <article class="tile tile--media tile--hover">
+              <div class="tile__thumb">
+                <img
+                  src="./assets/wystawa-3-koncept.svg"
+                  alt="Wizualizacja koncepcyjna wystawy: kolaż figur geometrycznych na granatowym tle"
+                  width="800"
+                  height="600"
+                  loading="lazy"
+                />
+              </div>
+              <div class="tile__body">
+                <span class="tag"><i data-lucide="frame"></i> Czynna — termin przykładowy</span>
+                <h3>Miasto w kadrze</h3>
+                <p>Przykładowa wystawa o obrazie miasta w sztuce i dokumencie.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ZAPOWIEDZI (kafelki bez efektu) -->
+      <section class="section" aria-labelledby="zapowiedzi-tytul">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow"><i data-lucide="calendar-days"></i> Wkrótce</p>
+            <h2 id="zapowiedzi-tytul">Zapowiedzi</h2>
+            <p class="lead">Wystawy w przygotowaniu — opisy i terminy do potwierdzenia.</p>
+          </div>
+          <div class="grid grid--3">
+            <article class="tile">
+              <span class="tile__icon"><i data-lucide="landmark"></i></span>
+              <h3>Rzemiosło dawnego miasta</h3>
+              <p>Przykładowa zapowiedź wystawy o warsztatach i cechach rzemieślniczych.</p>
+            </article>
+            <article class="tile">
+              <span class="tile__icon"><i data-lucide="book-open"></i></span>
+              <h3>Dokument i pamięć</h3>
+              <p>Przykładowa zapowiedź wystawy o archiwaliach i historii mówionej.</p>
+            </article>
+            <article class="tile">
+              <span class="tile__icon"><i data-lucide="palette"></i></span>
+              <h3>Współczesne pracownie</h3>
+              <p>Przykładowa zapowiedź wystawy o twórcach związanych z miastem.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="section section--blue section--tight" aria-labelledby="cta-tytul">
+        <div class="wrap cta">
+          <h2 id="cta-tytul">Chcesz zwiedzać z przewodnikiem?</h2>
+          <p class="lead" style="margin-inline: auto; max-width: 40rem; color: #d5d2f4">
+            Oprowadzania i warsztaty znajdziesz w kalendarzu wydarzeń.
+          </p>
+          <div class="cta__actions">
+            <a class="button button--light" href="./wydarzenia.html"><i data-lucide="calendar-days"></i> Kalendarz wydarzeń</a>
+            <a class="button button--ghost" href="./zwiedzanie.html" style="color: #fff; border-color: rgba(255,255,255,0.5)">Informacje dla zwiedzających</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" data-site-footer id="stopka">
+      <div class="wrap">
+        <div class="footer-grid">
+          <div>
+            <span class="footer-brand__name">Muzeum Miasta Lipowo</span>
+            <p>Muzeum miejskie — zbiory, wystawy i edukacja. Projekt demonstracyjny — marka fikcyjna.</p>
+            <div class="footer-social">
+              <a href="./kontakt.html" aria-label="Profil zdjęciowy (placeholder — wersja demonstracyjna)"><i data-lucide="camera"></i></a>
+              <a href="./kontakt.html" aria-label="Profil społecznościowy (placeholder — wersja demonstracyjna)"><i data-lucide="share-2"></i></a>
+            </div>
+          </div>
+          <div>
+            <h4>Zwiedzanie</h4>
+            <ul class="footer-list">
+              <li><a href="./wystawy.html">Wystawy</a></li>
+              <li><a href="./wydarzenia.html">Wydarzenia</a></li>
+              <li><a href="./kolekcje.html">Kolekcje</a></li>
+              <li><a href="./zwiedzanie.html">Informacje praktyczne</a></li>
+              <li><a href="./kontakt.html">Kontakt</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Kontakt</h4>
+            <ul class="footer-list">
+              <li>ul. Przykładowa 00 (adres przykładowy)</li>
+              <li>kontakt@muzeumlipowo.example</li>
+              <li>Bilety przez formularz</li>
+            </ul>
+          </div>
+        </div>
+        <p class="footer-disclaimer">
+          „Muzeum Miasta Lipowo” to marka fikcyjna stworzona na potrzeby projektu demonstracyjnego (portfolio). Nazwy, adres, godziny, ceny biletów, wystawy i grafiki to Dane przykładowe — wizualizacje koncepcyjne, nie zdjęcia ani dane prawdziwej instytucji. Adres e-mail w domenie muzeumlipowo.example nie odbiera wiadomości.
+        </p>
+        <div class="footer-bottom">
+          <span>© <span data-current-year>2026</span> Muzeum Miasta Lipowo — projekt demonstracyjny.</span>
+          <span>Nieoficjalny prototyp • strona bez indeksowania</span>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

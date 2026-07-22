@@ -1,0 +1,13 @@
+# Zaleznosci i buildy (odtwarzane w obrazie Dockera)
+node_modules/
+dist/
+
+# Logi deweloperskie
+*.log
+
+# Sekret formularza — NIGDY do repo (montowany w EasyPanel jako wolumen)
+kontakt.config.php
+
+# System
+.DS_Store
+Thumbs.db

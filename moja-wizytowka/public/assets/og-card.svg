@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Mikołaj Oczkowski — strony internetowe</title>
+  <desc id="desc">Pomarańczowo-czarna karta podglądu osobistej strony Mikołaja Oczkowskiego</desc>
+  <rect width="1200" height="630" fill="#faf9f6"/>
+  <path d="M0 0h28v630H0z" fill="#ff7a0d"/>
+  <g transform="translate(765 132)">
+    <rect width="350" height="263" rx="20" fill="#fff" stroke="#15161a" stroke-width="8"/>
+    <path d="M0 48h350" stroke="#15161a" stroke-width="8"/>
+    <circle cx="26" cy="24" r="7" fill="#ff7a0d"/><circle cx="49" cy="24" r="7" fill="#d8d2c4"/><circle cx="72" cy="24" r="7" fill="#d8d2c4"/>
+    <rect x="31" y="82" width="149" height="20" rx="10" fill="#ff7a0d"/>
+    <path d="M31 132h214M31 159h174M31 186h193" stroke="#15161a" stroke-width="11" stroke-linecap="round"/>
+    <rect x="31" y="213" width="116" height="34" rx="17" fill="#15161a"/>
+    <path d="M-28 263h406l-29 46H5l-33-46Z" fill="#fff" stroke="#15161a" stroke-width="8"/>
+  </g>
+  <g font-family="Segoe UI, Arial, sans-serif" fill="#15161a">
+    <text x="95" y="142" font-family="Consolas, monospace" font-size="22" letter-spacing="4" fill="#8a3d00">// STRONY INTERNETOWE</text>
+    <text x="95" y="270" font-size="78" font-weight="800" letter-spacing="-4">Mikołaj</text>
+    <text x="95" y="355" font-size="78" font-weight="800" letter-spacing="-4" fill="#ff7a0d">Oczkowski</text>
+    <text x="95" y="432" font-size="28" fill="#3a3f4a">Projekt · treść · kod</text>
+    <text x="95" y="515" font-family="Consolas, monospace" font-size="18" letter-spacing="2" fill="#6b7180">KOZIENICE · LOKALNIE I ZDALNIE</text>
+  </g>
+</svg>

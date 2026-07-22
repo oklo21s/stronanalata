@@ -1,0 +1,32 @@
+{
+  "name": "marka-wlasna",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "syntax": "node --check src/app.js && node --check src/main.js && node --check scripts/code-safety.mjs && node --check scripts/performance-check.mjs && node --check scripts/server-performance.mjs && node --check scripts/server-stability.mjs && node --check scripts/memory-stability.mjs && node --check scripts/build-determinism.mjs && node --check scripts/validate.mjs && node --check scripts/variant.mjs && node --check scripts/build-variant.mjs && node --check tests/app.test.mjs && node --check tests/stability.test.mjs",
+    "variant": "node scripts/build-variant.mjs",
+    "code:safety": "node scripts/code-safety.mjs",
+    "validate": "node scripts/validate.mjs",
+    "test": "node --test --test-concurrency=1 tests/app.test.mjs tests/stability.test.mjs",
+    "performance:bundle": "node scripts/performance-check.mjs",
+    "performance:server": "node scripts/server-performance.mjs",
+    "stability:memory": "node --expose-gc scripts/memory-stability.mjs",
+    "stability:build": "node scripts/build-determinism.mjs",
+    "stability:server": "node scripts/server-stability.mjs",
+    "check": "npm run syntax && npm run code:safety && npm run validate && npm test && npm run build && npm run performance:bundle",
+    "qa": "npm run check && npm run performance:server",
+    "stability": "npm run qa && npm run stability:build && npm run stability:memory && npm run stability:server"
+  },
+  "dependencies": {
+    "lucide": "^1.24.0",
+    "vite": "^8.1.5"
+  },
+  "devDependencies": {
+    "acorn": "^8.17.0",
+    "happy-dom": "^20.10.6"
+  }
+}

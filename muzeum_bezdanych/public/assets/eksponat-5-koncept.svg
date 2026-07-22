@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Wizualizacja koncepcyjna eksponatu: pamiątkowy medal">
+  <rect width="800" height="600" fill="#ded4c0"/>
+  <ellipse cx="400" cy="540" rx="120" ry="18" fill="#000" opacity="0.08"/>
+  <path d="M360 120 L 440 120 L 470 220 L 330 220 Z" fill="#e14b31"/>
+  <circle cx="400" cy="340" r="150" fill="#cf9f63" stroke="#8a5a2b" stroke-width="12"/>
+  <circle cx="400" cy="340" r="100" fill="none" stroke="#8a5a2b" stroke-width="6"/>
+  <path d="M400 260 L 420 320 L 484 320 L 432 358 L 452 418 L 400 380 L 348 418 L 368 358 L 316 320 L 380 320 Z" fill="#8a5a2b"/>
+</svg>

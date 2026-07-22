@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" role="img" aria-hidden="true">
+  <rect width="1536" height="1024" fill="#f1ebe0"/>
+  <line x1="140" y1="902" x2="1396" y2="902" stroke="#ddd2bf" stroke-width="6"/>
+
+  <!-- stojak -->
+  <rect x="244" y="150" width="14" height="752" rx="6" fill="#8a7f70"/>
+  <rect x="1278" y="150" width="14" height="752" rx="6" fill="#8a7f70"/>
+  <rect x="244" y="182" width="1048" height="14" rx="7" fill="#6c6358"/>
+  <path d="M196,902 L251,860 L306,902" fill="none" stroke="#8a7f70" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1230,902 L1285,860 L1340,902" fill="none" stroke="#8a7f70" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ubrania na wieszakach -->
+  <g transform="translate(320,204)">
+    <path d="M110,-18 L58,68 L162,68 Z" fill="none" stroke="#9a8f83" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M36,64 C36,40 62,20 88,17 L110,40 L132,17 C158,20 184,40 184,64 L158,104 L144,94 L144,300 L76,300 L76,94 L62,104 Z" fill="#e6a95f"/>
+    <rect x="92" y="210" width="36" height="60" rx="6" fill="none" stroke="#7a3f14" stroke-width="4"/>
+  </g>
+  <g transform="translate(550,204)">
+    <path d="M110,-18 L58,68 L162,68 Z" fill="none" stroke="#9a8f83" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M36,64 C36,40 62,20 88,17 C104,36 116,36 132,17 C158,20 184,40 184,64 L158,104 L144,94 L144,300 L76,300 L76,94 L62,104 Z" fill="#c96a3c"/>
+    <path d="M78,286 L142,286 M78,294 L142,294" fill="none" stroke="#9c4f26" stroke-width="4"/>
+  </g>
+  <g transform="translate(780,204)">
+    <path d="M110,-18 L58,68 L162,68 Z" fill="none" stroke="#9a8f83" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M36,64 C36,40 62,20 88,17 L110,40 L132,17 C158,20 184,40 184,64 L158,104 L144,94 L144,300 L76,300 L76,94 L62,104 Z" fill="#efe7d9" stroke="#c9a06a" stroke-width="4"/>
+  </g>
+  <g transform="translate(1010,204)">
+    <path d="M110,-18 L58,68 L162,68 Z" fill="none" stroke="#9a8f83" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M36,64 C36,40 62,20 88,17 C104,36 116,36 132,17 C158,20 184,40 184,64 L158,104 L144,94 L144,300 L76,300 L76,94 L62,104 Z" fill="#d99a4c"/>
+  </g>
+
+  <!-- złożony stos -->
+  <g transform="translate(1120,740)">
+    <rect x="0" y="0" width="230" height="42" rx="10" fill="#e6a95f"/>
+    <rect x="10" y="44" width="210" height="40" rx="10" fill="#efe7d9" stroke="#c9a06a" stroke-width="3"/>
+    <rect x="4" y="86" width="222" height="42" rx="10" fill="#c96a3c"/>
+  </g>
+</svg>

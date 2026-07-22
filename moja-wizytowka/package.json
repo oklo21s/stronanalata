@@ -1,0 +1,26 @@
+{
+  "name": "moja-wizytowka",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "generate:og": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/generate-og.ps1",
+    "syntax": "node --check src/app.js && node --check src/main.js && node --check scripts/validate.mjs && node --check scripts/performance-check.mjs && node --check scripts/stability.mjs && node --check tests/app.test.mjs && powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/check-powershell.ps1",
+    "validate": "node scripts/validate.mjs",
+    "test": "node --test tests/app.test.mjs",
+    "check": "npm run syntax && npm run validate && npm test && npm run build",
+    "performance": "node scripts/performance-check.mjs",
+    "qa": "npm run check && npm run performance",
+    "stability": "node scripts/stability.mjs",
+    "release:check": "npm run qa && npm run stability && npm audit"
+  },
+  "dependencies": {
+    "vite": "^8.1.5"
+  },
+  "devDependencies": {
+    "happy-dom": "^20.10.6"
+  }
+}

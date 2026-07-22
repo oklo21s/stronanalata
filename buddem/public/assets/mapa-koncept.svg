@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img">
+  <rect width="1200" height="900" fill="#ffffff"/>
+
+  <!-- schematyczne bryly sasiadujace, wylacznie pogladowe -->
+  <g fill="#f2f4f6" stroke="#dfe4e9" stroke-width="2">
+    <path d="M150 250 L330 210 L360 400 L300 520 L150 500 Z"/>
+    <path d="M330 640 L560 610 L640 720 L520 800 L330 780 Z"/>
+    <path d="M840 640 L1030 620 L1060 760 L880 790 Z"/>
+    <path d="M880 200 L1060 230 L1040 380 L860 360 Z"/>
+  </g>
+
+  <!-- bryla centralna, obszar dzialania -->
+  <path
+    d="M370 230 L560 190 L740 200 L860 260 L880 400 L840 560 L700 640 L520 620 L400 520 L360 380 Z"
+    fill="#ffd84d" stroke="#e0ab00" stroke-width="3"/>
+
+  <!-- podzialy wewnetrzne -->
+  <g stroke="#e0ab00" stroke-width="1.5" fill="none" opacity="0.75">
+    <path d="M560 190 L580 420 L520 620"/>
+    <path d="M360 380 L580 420 L880 400"/>
+    <path d="M700 640 L580 420"/>
+  </g>
+
+  <!-- punkty prowadzonych prac, dane przykladowe -->
+  <g fill="#12181d">
+    <circle cx="580" cy="420" r="14"/>
+    <circle cx="470" cy="330" r="9"/>
+    <circle cx="700" cy="300" r="9"/>
+    <circle cx="640" cy="530" r="9"/>
+    <circle cx="790" cy="430" r="9"/>
+  </g>
+  <g stroke="#12181d" stroke-width="2" fill="none" opacity="0.5">
+    <path d="M580 420 L470 330 M580 420 L700 300 M580 420 L640 530 M580 420 L790 430"/>
+  </g>
+
+  <!-- pierscienie zasiegu -->
+  <g stroke="#12181d" stroke-width="1.5" fill="none" opacity="0.25">
+    <circle cx="580" cy="420" r="120"/>
+    <circle cx="580" cy="420" r="210"/>
+  </g>
+</svg>

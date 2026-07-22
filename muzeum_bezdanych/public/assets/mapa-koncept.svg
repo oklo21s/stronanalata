@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="500" viewBox="0 0 1000 500" role="img" aria-label="Wizualizacja koncepcyjna mapy dojazdu — lokalizacja orientacyjna, nie prawdziwy adres">
+  <rect width="1000" height="500" fill="#e7e1d3"/>
+  <!-- rzeka -->
+  <path d="M-20 60 C 250 160, 300 300, 600 340 C 800 366, 900 440, 1020 470 L 1020 500 L -20 500 Z" fill="#bcd0e8"/>
+  <!-- park -->
+  <rect x="120" y="90" width="200" height="140" rx="14" fill="#cde0c2"/>
+  <!-- ulice -->
+  <g stroke="#cfc6b2" stroke-width="16" fill="none">
+    <path d="M0 250 H 1000"/>
+    <path d="M420 0 V 500"/>
+    <path d="M700 0 V 500"/>
+    <path d="M0 130 H 400"/>
+  </g>
+  <g stroke="#f4efe3" stroke-width="4" stroke-dasharray="14 12" fill="none">
+    <path d="M0 250 H 1000"/>
+    <path d="M420 0 V 500"/>
+  </g>
+  <!-- kwartały -->
+  <g fill="#d8cfbb">
+    <rect x="460" y="60" width="180" height="150" rx="8"/>
+    <rect x="740" y="70" width="180" height="140" rx="8"/>
+    <rect x="470" y="300" width="180" height="150" rx="8"/>
+  </g>
+  <!-- pinezka muzeum -->
+  <g transform="translate(420 250)">
+    <path d="M0 -70 C 40 -70 60 -40 60 -10 C 60 26 24 44 0 84 C -24 44 -60 26 -60 -10 C -60 -40 -40 -70 0 -70 Z" fill="#e14b31"/>
+    <circle cx="0" cy="-12" r="22" fill="#fff"/>
+    <path d="M-12 -2 L 0 -22 L 12 -2 Z" fill="#3f3ac9"/>
+  </g>
+  <text x="30" y="470" font-family="Arial, sans-serif" font-size="22" fill="#5b5443">Mapa poglądowa — Dane przykładowe</text>
+</svg>

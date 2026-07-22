@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" width="1536" height="1024" role="img">
+  <defs>
+    <linearGradient id="tloMost" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#eef1f4"/>
+      <stop offset="1" stop-color="#dde3e9"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1536" height="1024" fill="url(#tloMost)"/>
+
+  <!-- linia horyzontu -->
+  <path d="M0 720 H1536" stroke="#c3ccd4" stroke-width="2" fill="none"/>
+
+  <!-- pylony mostu podwieszanego -->
+  <g stroke="#43535f" stroke-width="10" fill="none" stroke-linecap="square">
+    <path d="M420 720 V220"/>
+    <path d="M1100 720 V220"/>
+  </g>
+
+  <!-- wanty -->
+  <g stroke="#f2b705" stroke-width="3.5" fill="none">
+    <path d="M420 240 L200 560 M420 240 L280 560 M420 240 L350 560"/>
+    <path d="M420 240 L500 560 M420 240 L620 560 M420 240 L740 560"/>
+    <path d="M1100 240 L800 560 M1100 240 L920 560 M1100 240 L1030 560"/>
+    <path d="M1100 240 L1180 560 M1100 240 L1300 560 M1100 240 L1420 560"/>
+  </g>
+
+  <!-- pomost -->
+  <rect x="80" y="560" width="1380" height="34" fill="#43535f"/>
+  <rect x="80" y="594" width="1380" height="10" fill="#2f3c46"/>
+
+  <!-- podpory -->
+  <g fill="#43535f">
+    <rect x="396" y="594" width="48" height="126"/>
+    <rect x="1076" y="594" width="48" height="126"/>
+  </g>
+
+  <!-- pas jezdni -->
+  <g stroke="#ffffff" stroke-width="4" fill="none" opacity="0.85">
+    <path d="M120 577 H240 M300 577 H420 M480 577 H600 M660 577 H780 M840 577 H960 M1020 577 H1140 M1200 577 H1320 M1380 577 H1440"/>
+  </g>
+
+  <!-- odbicie w wodzie -->
+  <g opacity="0.18">
+    <rect x="80" y="740" width="1380" height="12" fill="#43535f"/>
+    <path d="M420 760 V900 M1100 760 V900" stroke="#43535f" stroke-width="8" fill="none"/>
+  </g>
+</svg>

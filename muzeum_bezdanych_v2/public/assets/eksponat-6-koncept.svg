@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Wizualizacja koncepcyjna eksponatu: ceremonialna maska">
+  <rect width="800" height="600" fill="#ded4c0"/>
+  <ellipse cx="400" cy="530" rx="120" ry="22" fill="#000" opacity="0.08"/>
+  <path d="M400 110 C 290 130 270 240 280 340 C 290 440 350 500 400 510 C 450 500 510 440 520 340 C 530 240 510 130 400 110 Z" fill="#8a5a2b"/>
+  <path d="M340 250 q30 -40 60 0 q-30 20 -60 0 Z" fill="#efe6d2"/>
+  <path d="M400 250 q30 -40 60 0 q-30 20 -60 0 Z" fill="#efe6d2"/>
+  <path d="M395 290 L 405 290 L 400 360 Z" fill="#e14b31"/>
+  <path d="M360 400 q40 30 80 0" fill="none" stroke="#3f3ac9" stroke-width="10" stroke-linecap="round"/>
+  <path d="M300 150 l -40 -40 M500 150 l 40 -40" stroke="#3f3ac9" stroke-width="10" stroke-linecap="round"/>
+</svg>

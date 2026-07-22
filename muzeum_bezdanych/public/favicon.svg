@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Muzeum Miasta Lipowo">
+  <rect width="64" height="64" rx="14" fill="#1d1b39"/>
+  <path d="M32 14 L 50 25 H 14 Z" fill="#e14b31"/>
+  <g stroke="#efe6d2" stroke-width="3.4" stroke-linecap="round">
+    <path d="M19 28 V 44"/>
+    <path d="M27 28 V 44"/>
+    <path d="M37 28 V 44"/>
+    <path d="M45 28 V 44"/>
+  </g>
+  <rect x="14" y="46" width="36" height="5" rx="2" fill="#cf9f63"/>
+</svg>

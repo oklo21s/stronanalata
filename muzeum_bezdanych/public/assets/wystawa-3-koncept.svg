@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Wizualizacja koncepcyjna wystawy: kolaż figur geometrycznych">
+  <rect width="800" height="600" fill="#2f2ba0"/>
+  <path d="M120 120 L 360 120 L 240 360 Z" fill="#cf9f63"/>
+  <circle cx="560" cy="220" r="120" fill="#e14b31"/>
+  <rect x="440" y="380" width="240" height="140" fill="#efe6d2"/>
+  <rect x="120" y="420" width="160" height="120" fill="#3f3ac9" stroke="#efe6d2" stroke-width="6"/>
+</svg>

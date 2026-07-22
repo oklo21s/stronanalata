@@ -1,0 +1,94 @@
+:root {
+  color: #15161a;
+  background: #faf9f6;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body.static-page {
+  min-width: 320px;
+  margin: 0;
+  padding: clamp(1rem, 4vw, 3rem);
+  line-height: 1.7;
+}
+
+body.static-page--center {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 1rem;
+}
+
+.static-card {
+  width: min(780px, 100%);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vw, 3.5rem);
+  border: 1px solid #e6e1d6;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 18px 45px rgba(21, 22, 26, 0.08);
+}
+
+.static-card--thanks {
+  width: min(620px, 100%);
+  padding: clamp(1.5rem, 5vw, 3rem);
+  text-align: center;
+}
+
+.static-mark {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 1.4rem;
+  object-fit: contain;
+}
+
+.static-card:not(.static-card--thanks) .static-mark { margin: 0; }
+
+.static-card h1 {
+  margin: 0 0 2rem;
+  font-size: clamp(2.2rem, 7vw, 4rem);
+  line-height: 1.03;
+  letter-spacing: -0.04em;
+}
+
+.static-card--thanks h1 {
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  line-height: 1.05;
+}
+
+.static-card h2 {
+  margin: 2.2rem 0 0.55rem;
+  font-size: 1.25rem;
+}
+
+.static-card p,
+.static-card li { color: #3a3f4a; }
+
+.static-card a {
+  color: #8a3d00;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.static-card .meta { color: #6b7180; font-size: 0.85rem; }
+
+.static-button {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  margin-top: 2rem;
+  padding: 0.7rem 1.25rem;
+  border-radius: 999px;
+  background: #15161a;
+  color: #fff !important;
+  text-decoration: none;
+}
+
+.static-card--thanks .static-button { margin-top: 0.8rem; }
+
+.static-card a:focus-visible {
+  outline: 3px solid #ff7a0d;
+  outline-offset: 3px;
+}

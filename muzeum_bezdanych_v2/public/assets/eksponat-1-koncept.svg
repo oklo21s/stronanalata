@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Wizualizacja koncepcyjna eksponatu: ceramiczne naczynie">
+  <rect width="800" height="600" fill="#ded4c0"/>
+  <ellipse cx="400" cy="520" rx="150" ry="26" fill="#000" opacity="0.08"/>
+  <path d="M400 120 C 300 160 300 260 340 300 C 300 340 300 460 400 510 C 500 460 500 340 460 300 C 500 260 500 160 400 120 Z" fill="#3f3ac9"/>
+  <path d="M355 200 h90 M345 260 h110 M360 360 h80" stroke="#efe6d2" stroke-width="8" stroke-linecap="round"/>
+  <rect x="378" y="96" width="44" height="34" rx="6" fill="#2f2ba0"/>
+</svg>

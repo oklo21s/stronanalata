@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" width="1536" height="1024" role="img">
+  <defs>
+    <linearGradient id="tlo" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#141b21"/>
+      <stop offset="1" stop-color="#080c0f"/>
+    </linearGradient>
+    <linearGradient id="zolty" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffd84d"/>
+      <stop offset="1" stop-color="#f2b705"/>
+    </linearGradient>
+    <pattern id="siatka" width="64" height="64" patternUnits="userSpaceOnUse">
+      <path d="M64 0H0V64" fill="none" stroke="#232d36" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1536" height="1024" fill="url(#tlo)"/>
+  <rect width="1536" height="1024" fill="url(#siatka)" opacity="0.55"/>
+
+  <!-- szkielet budynku w budowie, prawa strona; lewa zostaje wolna na tekst -->
+  <g stroke="#7d93a5" stroke-width="3" fill="none" opacity="0.8">
+    <path d="M880 800 V420 H1210 V800"/>
+    <path d="M880 700 H1210 M880 600 H1210 M880 500 H1210"/>
+    <path d="M960 800 V420 M1050 800 V420 M1130 800 V420"/>
+  </g>
+
+  <!-- wypelnione stropy -->
+  <g fill="#1c252d">
+    <rect x="880" y="690" width="330" height="12"/>
+    <rect x="880" y="590" width="330" height="12"/>
+    <rect x="880" y="490" width="330" height="12"/>
+  </g>
+
+  <!-- zuraw wiezowy -->
+  <g stroke="#8fa6b6" stroke-width="3.5" fill="none">
+    <path d="M1300 800 V240"/>
+    <path d="M1284 800 V240 M1316 800 V240"/>
+    <path d="M1284 760 L1316 720 M1284 720 L1316 680 M1284 680 L1316 640 M1284 640 L1316 600 M1284 600 L1316 560 M1284 560 L1316 520 M1284 520 L1316 480 M1284 480 L1316 440 M1284 440 L1316 400 M1284 400 L1316 360 M1284 360 L1316 320 M1284 320 L1316 280"/>
+  </g>
+
+  <!-- wysiegnik i przeciwwaga -->
+  <g stroke="url(#zolty)" stroke-width="5" fill="none">
+    <path d="M1080 240 H1470"/>
+    <path d="M1300 200 L1120 240 M1300 200 L1450 240"/>
+  </g>
+  <rect x="1080" y="226" width="52" height="28" fill="url(#zolty)"/>
+  <rect x="1288" y="188" width="24" height="24" fill="url(#zolty)"/>
+
+  <!-- lina i hak -->
+  <g stroke="#ffd84d" stroke-width="2.5" fill="none">
+    <path d="M1180 240 V470"/>
+  </g>
+  <path d="M1168 470 H1192 L1186 496 H1174 Z" fill="#ffd84d"/>
+
+  <!-- linia gruntu -->
+  <path d="M760 800 H1520" stroke="#f2b705" stroke-width="4" fill="none"/>
+
+  <!-- bloki fundamentowe -->
+  <g fill="#1a232b" stroke="#2a343d" stroke-width="1.5">
+    <rect x="880" y="800" width="110" height="40"/>
+    <rect x="990" y="800" width="110" height="40"/>
+    <rect x="1100" y="800" width="110" height="40"/>
+    <rect x="1210" y="800" width="110" height="40"/>
+    <rect x="1320" y="800" width="110" height="40"/>
+  </g>
+
+  <!-- pasek pomiarowy -->
+  <g stroke="#7d93a5" stroke-width="2" fill="none" opacity="0.7">
+    <path d="M880 890 H1210"/>
+    <path d="M880 876 V904 M1045 876 V904 M1210 876 V904"/>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Wizualizacja koncepcyjna eksponatu: otwarta stara księga">
+  <rect width="800" height="600" fill="#ded4c0"/>
+  <ellipse cx="400" cy="470" rx="220" ry="30" fill="#000" opacity="0.08"/>
+  <path d="M400 200 C 320 170 220 175 170 200 L 170 430 C 220 405 320 400 400 430 Z" fill="#efe6d2" stroke="#1d1b39" stroke-width="6"/>
+  <path d="M400 200 C 480 170 580 175 630 200 L 630 430 C 580 405 480 400 400 430 Z" fill="#f5efe2" stroke="#1d1b39" stroke-width="6"/>
+  <g stroke="#8a5a2b" stroke-width="5">
+    <path d="M210 250 h140 M210 290 h140 M210 330 h120"/>
+    <path d="M450 250 h140 M450 290 h140 M450 330 h120"/>
+  </g>
+  <rect x="392" y="200" width="16" height="230" fill="#8a5a2b"/>
+</svg>

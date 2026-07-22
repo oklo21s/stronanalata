@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Wizualizacja koncepcyjna: wnętrze sali wystawowej ze zwiedzającym przed obrazem">
+  <rect width="800" height="600" fill="#ece4d4"/>
+  <!-- podłoga -->
+  <rect y="430" width="800" height="170" fill="#d8c9ad"/>
+  <line x1="0" y1="430" x2="800" y2="430" stroke="#c3b088" stroke-width="2"/>
+  <!-- obraz na ścianie -->
+  <rect x="120" y="90" width="300" height="230" fill="#f5efe2" stroke="#1d1b39" stroke-width="8"/>
+  <circle cx="230" cy="180" r="55" fill="#e14b31"/>
+  <path d="M150 300 L 260 190 L 390 300 Z" fill="#3f3ac9" opacity="0.85"/>
+  <!-- druga rama -->
+  <rect x="520" y="140" width="150" height="150" fill="#f5efe2" stroke="#1d1b39" stroke-width="7"/>
+  <rect x="555" y="175" width="80" height="80" fill="#cf9f63"/>
+  <!-- zwiedzający (sylwetka) -->
+  <g fill="#1d1b39">
+    <circle cx="470" cy="345" r="26"/>
+    <path d="M440 385 Q470 360 500 385 L505 500 L435 500 Z"/>
+  </g>
+  <!-- listwa dolna -->
+  <rect x="0" y="560" width="800" height="6" fill="#c3b088"/>
+</svg>

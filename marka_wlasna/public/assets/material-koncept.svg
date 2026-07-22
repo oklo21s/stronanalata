@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-hidden="true">
+  <rect width="1200" height="900" fill="#f6f3ee"/>
+  <defs>
+    <pattern id="knit" width="56" height="44" patternUnits="userSpaceOnUse">
+      <path d="M6,36 L28,12 L50,36" fill="none" stroke="#d99a4c" stroke-width="4" stroke-linecap="round"/>
+    </pattern>
+  </defs>
+
+  <rect x="210" y="200" width="800" height="520" rx="12" fill="#efe7d9" stroke="#c9a06a" stroke-width="4"/>
+  <rect x="210" y="200" width="800" height="520" rx="12" fill="url(#knit)"/>
+  <rect x="210" y="200" width="800" height="520" rx="12" fill="none" stroke="#b0561f" stroke-width="4"/>
+
+  <!-- wymiar szerokości -->
+  <line x1="210" y1="150" x2="1010" y2="150" stroke="#8a7f70" stroke-width="3"/>
+  <path d="M210,150 l22,-11 v22 Z" fill="#8a7f70"/>
+  <path d="M1010,150 l-22,-11 v22 Z" fill="#8a7f70"/>
+  <line x1="210" y1="138" x2="210" y2="200" stroke="#8a7f70" stroke-width="2"/>
+  <line x1="1010" y1="138" x2="1010" y2="200" stroke="#8a7f70" stroke-width="2"/>
+  <rect x="560" y="130" width="100" height="40" rx="6" fill="#f6f3ee" stroke="#8a7f70" stroke-width="2"/>
+  <line x1="578" y1="150" x2="642" y2="150" stroke="#6c6358" stroke-width="4"/>
+
+  <!-- wymiar wysokości -->
+  <line x1="150" y1="200" x2="150" y2="720" stroke="#8a7f70" stroke-width="3"/>
+  <path d="M150,200 l-11,22 h22 Z" fill="#8a7f70"/>
+  <path d="M150,720 l-11,-22 h22 Z" fill="#8a7f70"/>
+  <line x1="138" y1="200" x2="210" y2="200" stroke="#8a7f70" stroke-width="2"/>
+  <line x1="138" y1="720" x2="210" y2="720" stroke="#8a7f70" stroke-width="2"/>
+
+  <!-- próbki gramatur -->
+  <circle cx="300" cy="800" r="26" fill="#e6a95f"/>
+  <circle cx="372" cy="800" r="26" fill="#c96a3c"/>
+  <circle cx="444" cy="800" r="26" fill="#efe7d9" stroke="#c9a06a" stroke-width="3"/>
+  <rect x="520" y="782" width="360" height="36" rx="8" fill="#ece4d6"/>
+  <rect x="520" y="782" width="150" height="36" rx="8" fill="#e6a95f"/>
+</svg>

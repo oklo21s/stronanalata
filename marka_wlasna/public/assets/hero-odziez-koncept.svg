@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" role="img" aria-hidden="true">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#231f1b"/>
+      <stop offset="1" stop-color="#141210"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.26" r="0.62">
+      <stop offset="0" stop-color="#e6a95f" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#e6a95f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1536" height="1024" fill="url(#bg)"/>
+  <rect width="1536" height="1024" fill="url(#glow)"/>
+  <line x1="236" y1="210" x2="1300" y2="210" stroke="#4c463d" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- bluza z kapturem -->
+  <g transform="translate(320,230)">
+    <path d="M150,-22 L80,72 L220,72 Z" fill="none" stroke="#9a8f83" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M150,-22 c0,-13 -3,-21 -15,-23" fill="none" stroke="#9a8f83" stroke-width="6" stroke-linecap="round"/>
+    <path d="M50,86 C50,50 84,26 116,22 L150,54 L184,22 C216,26 250,50 250,86 L214,140 L196,126 L196,360 L104,360 L104,126 L86,140 Z" fill="#e6a95f"/>
+    <path d="M104,70 C118,26 182,26 196,70 L184,92 C168,60 132,60 116,92 Z" fill="#d1893f"/>
+    <path d="M142,66 l-6,52 M158,66 l6,52" fill="none" stroke="#7a3f14" stroke-width="5" stroke-linecap="round"/>
+    <rect x="98" y="250" width="104" height="74" rx="8" fill="none" stroke="#7a3f14" stroke-width="5"/>
+  </g>
+
+  <!-- sweter -->
+  <g transform="translate(618,230)">
+    <path d="M150,-22 L80,72 L220,72 Z" fill="none" stroke="#9a8f83" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M150,-22 c0,-13 -3,-21 -15,-23" fill="none" stroke="#9a8f83" stroke-width="6" stroke-linecap="round"/>
+    <path d="M50,86 C50,50 84,26 116,22 C132,44 168,44 184,22 C216,26 250,50 250,86 L214,140 L196,126 L196,360 L104,360 L104,126 L86,140 Z" fill="#efe7d9"/>
+    <path d="M116,34 Q150,60 184,34" fill="none" stroke="#c3b6a2" stroke-width="5"/>
+    <path d="M108,344 L192,344 M108,352 L192,352" fill="none" stroke="#cdc0ab" stroke-width="4"/>
+    <path d="M92,132 L108,148 M208,132 L192,148" fill="none" stroke="#cdc0ab" stroke-width="4"/>
+  </g>
+
+  <!-- podkoszulka -->
+  <g transform="translate(918,246)">
+    <path d="M138,-22 L78,60 L198,60 Z" fill="none" stroke="#9a8f83" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M138,-22 c0,-13 -3,-21 -15,-23" fill="none" stroke="#9a8f83" stroke-width="6" stroke-linecap="round"/>
+    <path d="M46,80 C46,48 78,26 108,22 L138,50 L168,22 C198,26 230,48 230,80 L198,128 L182,116 L182,326 L94,326 L94,116 L78,128 Z" fill="#c96a3c"/>
+    <path d="M114,40 Q138,58 162,40" fill="none" stroke="#f2e6d6" stroke-width="5" stroke-opacity="0.7"/>
+  </g>
+
+  <rect x="236" y="205" width="1064" height="4" fill="#000000" opacity="0.18"/>
+</svg>

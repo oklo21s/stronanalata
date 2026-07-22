@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Wizualizacja koncepcyjna eksponatu: drewniane krzesło">
+  <rect width="800" height="600" fill="#ded4c0"/>
+  <ellipse cx="400" cy="530" rx="150" ry="24" fill="#000" opacity="0.08"/>
+  <g fill="none" stroke="#8a5a2b" stroke-width="20" stroke-linecap="round">
+    <path d="M320 140 V 520"/>
+    <path d="M480 140 V 520"/>
+    <path d="M320 320 H 480"/>
+    <path d="M300 520 H 500"/>
+  </g>
+  <rect x="320" y="150" width="160" height="30" rx="8" fill="#e14b31"/>
+  <rect x="320" y="210" width="160" height="30" rx="8" fill="#cf9f63"/>
+</svg>

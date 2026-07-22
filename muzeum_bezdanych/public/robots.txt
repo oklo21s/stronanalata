@@ -1,0 +1,3 @@
+# Projekt demonstracyjny — marka fikcyjna. Nie indeksować.
+User-agent: *
+Disallow: /

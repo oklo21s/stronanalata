@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">Ilustracja warsztatu twórcy stron</title>
+  <desc id="desc">Ręcznie rysowany laptop z projektem strony, telefon, notatki i narzędzia</desc>
+  <defs>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#15161a" flood-opacity=".09"/>
+    </filter>
+    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.4" fill="#d8d2c4"/></pattern>
+  </defs>
+
+  <path d="M116 179c86-84 176-91 259-13 52 49 77 68 134 38 81-43 134-99 235-47" fill="none" stroke="#d8d2c4" stroke-width="5" stroke-linecap="round" stroke-dasharray="4 18"/>
+  <path d="M116 179c86-84 176-91 259-13" fill="none" stroke="#ff7a0d" stroke-width="7" stroke-linecap="round" stroke-dasharray="2 20"/>
+
+  <g transform="translate(85 112) rotate(-7)" filter="url(#shadow)">
+    <rect x="0" y="0" width="164" height="190" rx="13" fill="#fff" stroke="#15161a" stroke-width="6"/>
+    <rect x="0" y="0" width="164" height="190" rx="13" fill="url(#dots)" opacity=".5"/>
+    <path d="m39 50 17 17 39-39" fill="none" stroke="#ff7a0d" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M35 100h94M35 123h71M35 146h82" stroke="#15161a" stroke-width="7" stroke-linecap="round"/>
+    <circle cx="134" cy="26" r="10" fill="#ff7a0d"/>
+  </g>
+
+  <g transform="translate(183 218)" filter="url(#shadow)">
+    <rect x="0" y="0" width="557" height="352" rx="22" fill="#fff" stroke="#15161a" stroke-width="8"/>
+    <rect x="0" y="0" width="557" height="52" rx="22" fill="#f2efe9" stroke="#15161a" stroke-width="8"/>
+    <path d="M0 52h557" stroke="#15161a" stroke-width="8"/>
+    <circle cx="28" cy="26" r="7" fill="#ff7a0d"/><circle cx="51" cy="26" r="7" fill="#d8d2c4"/><circle cx="74" cy="26" r="7" fill="#d8d2c4"/>
+    <path d="M447 26h73" stroke="#d8d2c4" stroke-width="8" stroke-linecap="round"/>
+    <rect x="34" y="84" width="489" height="232" rx="13" fill="#faf9f6" stroke="#15161a" stroke-width="5"/>
+    <rect x="60" y="109" width="192" height="23" rx="11" fill="#ff7a0d"/>
+    <path d="M60 158h259M60 181h211M60 204h235" stroke="#15161a" stroke-width="10" stroke-linecap="round"/>
+    <rect x="60" y="239" width="133" height="46" rx="23" fill="#15161a"/>
+    <path d="M86 262h79" stroke="#fff" stroke-width="7" stroke-linecap="round"/>
+    <rect x="360" y="104" width="132" height="181" rx="17" fill="#fff" stroke="#15161a" stroke-width="5"/>
+    <path d="M381 134h89M381 157h61M381 180h77" stroke="#d8d2c4" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="426" cy="235" r="27" fill="#fff0e3" stroke="#ff7a0d" stroke-width="6"/>
+    <path d="m414 235 9 9 17-20" fill="none" stroke="#ff7a0d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M-34 352h625l-41 55H10l-44-55Z" fill="#fff" stroke="#15161a" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M244 371h73" stroke="#d8d2c4" stroke-width="8" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(713 335) rotate(6)" filter="url(#shadow)">
+    <rect x="0" y="0" width="135" height="237" rx="21" fill="#fff" stroke="#15161a" stroke-width="7"/>
+    <path d="M48 17h39" stroke="#15161a" stroke-width="6" stroke-linecap="round"/>
+    <rect x="17" y="45" width="101" height="119" rx="12" fill="#fff0e3" stroke="#15161a" stroke-width="4"/>
+    <path d="M34 74h67M34 96h51M34 118h58" stroke="#15161a" stroke-width="7" stroke-linecap="round"/>
+    <rect x="34" y="137" width="55" height="13" rx="6" fill="#ff7a0d"/>
+    <circle cx="68" cy="207" r="9" fill="#ff7a0d"/>
+  </g>
+
+  <g fill="none" stroke="#15161a" stroke-linecap="round">
+    <path d="M97 616h91" stroke-width="6"/>
+    <path d="M74 643h76" stroke-width="4" opacity=".45"/>
+    <path d="M780 622h89" stroke-width="5"/>
+  </g>
+  <g fill="#ff7a0d">
+    <path d="m798 202 8 18 19 8-19 8-8 18-8-18-19-8 19-8Z"/>
+    <circle cx="690" cy="145" r="8"/>
+    <circle cx="285" cy="118" r="6"/>
+  </g>
+</svg>
