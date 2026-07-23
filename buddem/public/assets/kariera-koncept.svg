@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1536 1024" width="1536" height="1024" role="img">
   <defs>
     <linearGradient id="tloKariera" x1="0" y1="0" x2="0.5" y2="1">
-      <stop offset="0" stop-color="#1a232b"/>
-      <stop offset="1" stop-color="#0b1014"/>
+      <stop offset="0" stop-color="#243039"/>
+      <stop offset="1" stop-color="#121a20"/>
     </linearGradient>
     <linearGradient id="kask" x1="0" y1="0" x2="0.4" y2="1">
       <stop offset="0" stop-color="#ffe07a"/>
@@ -13,7 +13,7 @@
   <rect width="1536" height="1024" fill="url(#tloKariera)"/>
 
   <!-- rusztowanie w tle -->
-  <g stroke="#2c3740" stroke-width="3" fill="none" opacity="0.9">
+  <g stroke="#42525e" stroke-width="3" fill="none" opacity="0.9">
     <path d="M120 200 V900 M400 200 V900 M680 200 V900 M960 200 V900 M1240 200 V900 M1440 200 V900"/>
     <path d="M60 320 H1500 M60 480 H1500 M60 640 H1500 M60 800 H1500"/>
     <path d="M120 320 L400 480 M400 320 L680 480 M680 480 L960 640 M960 480 L1240 640"/>
@@ -22,14 +22,14 @@
   <!-- dwie sylwetki w kaskach, ujecie schematyczne -->
   <g>
     <!-- postac lewa -->
-    <path d="M560 700 q0 -120 110 -120 q110 0 110 120 z" fill="#26313a"/>
-    <circle cx="670" cy="520" r="62" fill="#33404a"/>
+    <path d="M560 700 q0 -120 110 -120 q110 0 110 120 z" fill="#3d4e5b"/>
+    <circle cx="670" cy="520" r="62" fill="#4a5c6a"/>
     <path d="M600 512 q70 -96 140 0 z" fill="url(#kask)"/>
     <rect x="592" y="504" width="156" height="18" rx="9" fill="url(#kask)"/>
 
     <!-- postac prawa -->
-    <path d="M820 700 q0 -140 128 -140 q128 0 128 140 z" fill="#2d3941"/>
-    <circle cx="948" cy="474" r="72" fill="#3a4854"/>
+    <path d="M820 700 q0 -140 128 -140 q128 0 128 140 z" fill="#455764"/>
+    <circle cx="948" cy="474" r="72" fill="#526576"/>
     <path d="M868 464 q80 -110 160 0 z" fill="url(#kask)"/>
     <rect x="858" y="456" width="180" height="20" rx="10" fill="url(#kask)"/>
   </g>

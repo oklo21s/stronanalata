@@ -68,4 +68,22 @@
     <path d="M880 890 H1210"/>
     <path d="M880 876 V904 M1045 876 V904 M1210 876 V904"/>
   </g>
+
+  <!-- droga w budowie: pas w perspektywie w dolnym planie; obok kubatury
+       na stronie pojawiaja sie tez "drogi i obiekty publiczne" z naglowka -->
+  <g>
+    <!-- nawierzchnia -->
+    <path d="M1118 848 L1212 848 L1520 1024 L700 1024 Z" fill="#0f151a"/>
+    <!-- krawedzie jezdni -->
+    <path d="M1118 848 L700 1024" stroke="#3a4650" stroke-width="4" fill="none"/>
+    <path d="M1212 848 L1520 1024" stroke="#3a4650" stroke-width="4" fill="none"/>
+    <!-- przerywana os jezdni -->
+    <path d="M1165 848 L1110 1024" stroke="#ffd84d" stroke-width="6" fill="none" stroke-dasharray="14 30" opacity="0.9"/>
+    <!-- slupki prowadzace przy krawedzi -->
+    <g fill="#7d93a5" opacity="0.7">
+      <rect x="978" y="884" width="8" height="22"/>
+      <rect x="858" y="932" width="9" height="26"/>
+      <rect x="738" y="986" width="10" height="32"/>
+    </g>
+  </g>
 </svg>

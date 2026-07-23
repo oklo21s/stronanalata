@@ -9,32 +9,35 @@
     <path d="M880 200 L1060 230 L1040 380 L860 360 Z"/>
   </g>
 
-  <!-- bryla centralna, obszar dzialania -->
+  <!-- bryla centralna, obszar dzialania; wypelnienie wyciszone do bladego zolcia,
+       zeby plaska plama nie przytlaczala punktow z realna informacja -->
   <path
     d="M370 230 L560 190 L740 200 L860 260 L880 400 L840 560 L700 640 L520 620 L400 520 L360 380 Z"
-    fill="#ffd84d" stroke="#e0ab00" stroke-width="3"/>
+    fill="#fbedbf" stroke="#e0ab00" stroke-width="3"/>
 
   <!-- podzialy wewnetrzne -->
-  <g stroke="#e0ab00" stroke-width="1.5" fill="none" opacity="0.75">
+  <g stroke="#e0ab00" stroke-width="1.5" fill="none" opacity="0.6">
     <path d="M560 190 L580 420 L520 620"/>
     <path d="M360 380 L580 420 L880 400"/>
     <path d="M700 640 L580 420"/>
   </g>
 
-  <!-- punkty prowadzonych prac, dane przykladowe -->
-  <g fill="#12181d">
-    <circle cx="580" cy="420" r="14"/>
-    <circle cx="470" cy="330" r="9"/>
-    <circle cx="700" cy="300" r="9"/>
-    <circle cx="640" cy="530" r="9"/>
-    <circle cx="790" cy="430" r="9"/>
-  </g>
-  <g stroke="#12181d" stroke-width="2" fill="none" opacity="0.5">
+  <!-- polaczenia miedzy punktami (pod spodem, zeby kropki byly na wierzchu) -->
+  <g stroke="#12181d" stroke-width="2.5" fill="none" opacity="0.7">
     <path d="M580 420 L470 330 M580 420 L700 300 M580 420 L640 530 M580 420 L790 430"/>
   </g>
 
+  <!-- punkty prowadzonych prac, dane przykladowe -->
+  <g fill="#12181d">
+    <circle cx="580" cy="420" r="15"/>
+    <circle cx="470" cy="330" r="10"/>
+    <circle cx="700" cy="300" r="10"/>
+    <circle cx="640" cy="530" r="10"/>
+    <circle cx="790" cy="430" r="10"/>
+  </g>
+
   <!-- pierscienie zasiegu -->
-  <g stroke="#12181d" stroke-width="1.5" fill="none" opacity="0.25">
+  <g stroke="#12181d" stroke-width="1.5" fill="none" opacity="0.35">
     <circle cx="580" cy="420" r="120"/>
     <circle cx="580" cy="420" r="210"/>
   </g>

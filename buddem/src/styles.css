@@ -76,6 +76,20 @@
   color: #12181d;
 }
 
+/* Drugie pasmo jest ciemne w obu motywach — tekst musi zostać jasny, inaczej
+   reguła wyżej pomalowałaby go na ciemno na ciemnym tle. */
+:root[data-theme="dark"] .stats--second {
+  color: #eef2f5;
+}
+
+:root[data-theme="dark"] .stats--second .stat-grid dt {
+  color: var(--yellow);
+}
+
+:root[data-theme="dark"] .stats--second .stat-grid dd {
+  color: #aeb9c2;
+}
+
 /* Nakładka intro: panele ciemne, napis jasny — jak w motywie jasnym. */
 :root[data-theme="dark"] .intro-panel {
   background: #12181d;
@@ -712,8 +726,26 @@ svg.lucide {
   padding-block: clamp(2.75rem, 5vw, 4rem);
 }
 
+/* Drugie pasmo liczb jest ciemne — pierwsze zostaje żółte. Dwa sąsiadujące
+   pasma na identycznym żółtym tle zlewały się w jedno; kontrast żółte→ciemne
+   rozdziela „BudDem w liczbach" od „Skali działania" i daje akcent w dolnej
+   części strony. Kolory są stałe (nie tokeny), więc nie odwracają się w trybie
+   ciemnym. */
 .stats--second {
-  background: linear-gradient(180deg, #ffd84d 0%, #ffcb1f 100%);
+  background: #12181d;
+  color: #eef2f5;
+}
+
+.stats--second .eyebrow--dark {
+  color: var(--yellow);
+}
+
+.stats--second .stat-grid dt {
+  color: var(--yellow);
+}
+
+.stats--second .stat-grid dd {
+  color: #aeb9c2;
 }
 
 .stats h2 {
@@ -765,7 +797,10 @@ svg.lucide {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(90deg, rgb(11 16 20 / 0.95) 40%, rgb(11 16 20 / 0.5) 100%);
+  /* Mocna nakładka pod tekstem (lewa strona), znacznie lżejsza po prawej, gdzie
+     stoją sylwetki w kaskach — wcześniej 0.95/0.5 gasiło ilustrację prawie na
+     czarno. Tekst zostaje czytelny, rysunek staje się widoczny. */
+  background: linear-gradient(90deg, rgb(11 16 20 / 0.8) 32%, rgb(11 16 20 / 0.42) 66%, rgb(11 16 20 / 0.28) 100%);
 }
 
 .career__inner {
@@ -917,6 +952,12 @@ svg.lucide {
 
 /* --- faq --- */
 
+/* Dolna połowa strony była serią białych sekcji — FAQ dostaje własne, lekko
+   szare tło, żeby czytać się jako osobny panel przed ciemnym kontaktem. */
+.faq {
+  background: var(--paper-soft);
+}
+
 .faq-grid {
   display: grid;
   gap: clamp(2rem, 5vw, 4rem);
@@ -982,6 +1023,9 @@ svg.lucide {
 .contact {
   background: var(--ink);
   color: var(--paper);
+  /* Żółta kreska otwiera strefę finalnego kontaktu — dolna połowa dostaje
+     wyraźny akcent, zamiast po cichu przechodzić w stopkę. */
+  border-top: 6px solid var(--yellow);
 }
 
 .contact-heading {
@@ -1051,11 +1095,19 @@ svg.lucide {
   --contact-error: #a52c22;
 }
 
+/* Formularz jako wyodrębniona karta — lekko jaśniejsze tło niż sekcja, obwódka,
+   żółty akcent u góry i cień. Dzięki temu wybija się jako końcowe CTA, a nie
+   ginie jako kolejny blok tekstu na ciemnym tle. Kolory są stałe, bo sekcja
+   kontaktu jest ciemna w obu motywach. */
 .contact-form {
   max-width: 44rem;
   margin-top: 2.5rem;
-  padding-top: 1.75rem;
-  border-top: 1px solid var(--ink-line);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  background: #1b232a;
+  border: 1px solid #2a333c;
+  border-top: 4px solid var(--yellow);
+  border-radius: var(--radius);
+  box-shadow: 0 24px 60px rgb(0 0 0 / 0.35);
 }
 
 .honeypot {
@@ -1152,6 +1204,33 @@ svg.lucide {
 .footer-grid > p {
   max-width: 62ch;
   font-size: 0.9rem;
+}
+
+/* Disclaimer rozbity na krótkie punkty zamiast jednego gęstego akapitu —
+   czyta się szybciej i każde zastrzeżenie stoi osobno. */
+.footer-disclaimer {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.55rem;
+  max-width: 64ch;
+  font-size: 0.9rem;
+}
+
+.footer-disclaimer li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.footer-disclaimer li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.5rem;
+  height: 2px;
+  background: var(--yellow-deep);
 }
 
 .footer-links {
@@ -1473,7 +1552,7 @@ svg.lucide {
   }
 
   .career::after {
-    background: linear-gradient(180deg, rgb(11 16 20 / 0.94) 55%, rgb(11 16 20 / 0.7) 100%);
+    background: linear-gradient(180deg, rgb(11 16 20 / 0.86) 52%, rgb(11 16 20 / 0.58) 100%);
   }
 
   .hero-actions {
