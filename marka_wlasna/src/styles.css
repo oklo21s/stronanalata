@@ -964,6 +964,9 @@ svg.lucide {
 
 .career__copy h2 {
   margin-bottom: 1.1rem;
+  /* Sekcja ma zawsze ciemne tło w obu motywach, więc nagłówek trzyma stałą jasną
+     barwę zamiast dziedziczyć token --paper, który w trybie ciemnym gasł. */
+  color: #ffffff;
 }
 
 .career__copy > p {
@@ -984,6 +987,7 @@ svg.lucide {
   border: 1px solid rgb(255 255 255 / 0.28);
   border-radius: 999px;
   font-size: 0.88rem;
+  color: #eef2f5;
 }
 
 .concept-label--career {
