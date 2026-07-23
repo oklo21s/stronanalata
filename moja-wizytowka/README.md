@@ -35,9 +35,17 @@ Formularz wysyła dane POST do `public/kontakt.php`, a odbiorcą zgłoszeń jest
 - waliduje po stronie serwera te same limity co HTML (firma 2–120, e-mail ≤ 254,
   wiadomość 20–3000) i odrzuca zgłoszenie stroną z komunikatem,
 - wysyła mail przez PHPMailer i uwierzytelniony SMTP Hostingera,
+- jeśli konfiguracji SMTP/PHPMailera brak (albo wysyłka SMTP zawiedzie), korzysta
+  z transportu zapasowego przez funkcję `mail()` serwera — formularz działa więc
+  od razu po wgraniu na hosting, a po dodaniu SMTP automatycznie go używa,
 - ustawia `Reply-To` na adres klienta i rozpoznawalny temat wiadomości,
 - po sukcesie przekierowuje 303 na `/dziekuje.html`,
 - nie zapisuje treści zgłoszeń w logach.
+
+> Transport zapasowy `mail()` wysyła z adresu `formularz@<domena-strony>`. Aby
+> wiadomości nie trafiały do spamu, w hPanelu powinny być ustawione rekordy
+> SPF/DKIM/DMARC domeny. Pełny, uwierzytelniony SMTP nadal jest zalecany dla
+> najlepszej dostarczalności.
 
 Konfiguracja SMTP leży **poza repozytorium i poza katalogiem publicznym** — wzór
 z instrukcją wdrożenia znajduje się w `kontakt.config.example.php`. Prawdziwy

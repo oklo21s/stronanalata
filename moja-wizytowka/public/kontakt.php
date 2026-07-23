@@ -9,6 +9,8 @@
  *    (firma 2–120, e-mail ≤ 254, wiadomość 20–3000),
  *  - wysyłka przez uwierzytelniony SMTP (PHPMailer), dane z pliku konfiguracyjnego
  *    przechowywanego POZA katalogiem publicznym (zob. kontakt.config.example.php),
+ *  - gdy konfiguracji SMTP/PHPMailera brak lub wysyłka SMTP się nie powiedzie,
+ *    zgłoszenie idzie transportem zapasowym przez funkcję mail() serwera,
  *  - sukces → przekierowanie 303 na /dziekuje.html,
  *  - odrzucenie → strona z komunikatem i linkiem powrotnym do formularza.
  *
@@ -114,56 +116,86 @@ if ($bledy !== []) {
     );
 }
 
-// Konfiguracja SMTP leży poza katalogiem publicznym (poziom wyżej niż public_html).
+// Wspólny temat i treść wiadomości — niezależne od wybranego transportu.
+$temat = 'Nowe zapytanie ze strony — ' . mb_substr($firma, 0, 80, 'UTF-8');
+$tresc = "Imię lub nazwa firmy:\n{$firma}\n\nE-mail do odpowiedzi:\n{$email}\n\nWiadomość:\n{$wiadomosc}\n";
+
+// Domena serwera jako podstawa adresu nadawcy zapasowej wysyłki — poprawia
+// zgodność z SPF (mail wychodzi z adresu w domenie, na której działa strona).
+$domenaNadawcy = strtolower((string) ($_SERVER['HTTP_HOST'] ?? ''));
+$domenaNadawcy = (string) preg_replace('/:\d+$/', '', $domenaNadawcy);
+$domenaNadawcy = (string) preg_replace('/^www\./', '', $domenaNadawcy);
+if ($domenaNadawcy === '') {
+    $domenaNadawcy = 'stronanalata.pl';
+}
+
+// Transport preferowany: uwierzytelniony SMTP przez PHPMailer. Wymaga pliku
+// konfiguracyjnego spoza katalogu publicznego (poziom wyżej niż public_html)
+// oraz biblioteki PHPMailer wgranej razem z nim.
 $sciezkaKonfiguracji = dirname(__DIR__) . '/kontakt.config.php';
-if (!is_file($sciezkaKonfiguracji)) {
-    pokaz_komunikat(
-        500,
-        'Formularz chwilowo niedostępny',
-        [],
-        'Wysyłka wiadomości jest w tej chwili niemożliwa. Napisz proszę bezpośrednio na e-mail.'
-    );
-}
-$konfiguracja = require $sciezkaKonfiguracji;
+$konfiguracja = is_file($sciezkaKonfiguracji) ? require $sciezkaKonfiguracji : null;
 
-$katalogPhpmailer = rtrim((string) ($konfiguracja['phpmailer_dir'] ?? ''), '/\\');
-$plikiPhpmailer = ['Exception.php', 'PHPMailer.php', 'SMTP.php'];
-foreach ($plikiPhpmailer as $plik) {
-    if ($katalogPhpmailer === '' || !is_file($katalogPhpmailer . '/' . $plik)) {
-        pokaz_komunikat(
-            500,
-            'Formularz chwilowo niedostępny',
-            [],
-            'Wysyłka wiadomości jest w tej chwili niemożliwa. Napisz proszę bezpośrednio na e-mail.'
-        );
+$phpmailerGotowy = false;
+if (is_array($konfiguracja)) {
+    $katalogPhpmailer = rtrim((string) ($konfiguracja['phpmailer_dir'] ?? ''), '/\\');
+    $phpmailerGotowy = $katalogPhpmailer !== '';
+    foreach (['Exception.php', 'PHPMailer.php', 'SMTP.php'] as $plik) {
+        if (!$phpmailerGotowy || !is_file($katalogPhpmailer . '/' . $plik)) {
+            $phpmailerGotowy = false;
+            break;
+        }
+        require_once $katalogPhpmailer . '/' . $plik;
     }
-    require_once $katalogPhpmailer . '/' . $plik;
 }
 
-$mailer = new PHPMailer\PHPMailer\PHPMailer(true);
+$wyslano = false;
 
-try {
-    $mailer->isSMTP();
-    $mailer->Host = (string) $konfiguracja['smtp_host'];
-    $mailer->Port = (int) $konfiguracja['smtp_port'];
-    $mailer->SMTPAuth = true;
-    $mailer->Username = (string) $konfiguracja['smtp_user'];
-    $mailer->Password = (string) $konfiguracja['smtp_pass'];
-    $mailer->SMTPSecure = (string) ($konfiguracja['smtp_secure'] ?? PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS);
-    $mailer->CharSet = PHPMailer\PHPMailer\PHPMailer::CHARSET_UTF8;
+if ($phpmailerGotowy) {
+    $mailer = new PHPMailer\PHPMailer\PHPMailer(true);
+    try {
+        $mailer->isSMTP();
+        $mailer->Host = (string) $konfiguracja['smtp_host'];
+        $mailer->Port = (int) $konfiguracja['smtp_port'];
+        $mailer->SMTPAuth = true;
+        $mailer->Username = (string) $konfiguracja['smtp_user'];
+        $mailer->Password = (string) $konfiguracja['smtp_pass'];
+        $mailer->SMTPSecure = (string) ($konfiguracja['smtp_secure'] ?? PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS);
+        $mailer->CharSet = PHPMailer\PHPMailer\PHPMailer::CHARSET_UTF8;
 
-    $nadawca = (string) ($konfiguracja['from_email'] ?? $konfiguracja['smtp_user']);
-    $mailer->setFrom($nadawca, 'Formularz — stronanalata.pl');
-    $mailer->addAddress(ODBIORCA);
-    $mailer->addReplyTo($email, $firma);
+        $nadawca = (string) ($konfiguracja['from_email'] ?? $konfiguracja['smtp_user']);
+        $mailer->setFrom($nadawca, 'Formularz — stronanalata.pl');
+        $mailer->addAddress(ODBIORCA);
+        $mailer->addReplyTo($email, $firma);
 
-    $mailer->Subject = 'Nowe zapytanie ze strony — ' . mb_substr($firma, 0, 80, 'UTF-8');
-    $mailer->Body = "Imię lub nazwa firmy:\n{$firma}\n\nE-mail do odpowiedzi:\n{$email}\n\nWiadomość:\n{$wiadomosc}\n";
-    $mailer->isHTML(false);
+        $mailer->Subject = $temat;
+        $mailer->Body = $tresc;
+        $mailer->isHTML(false);
 
-    $mailer->send();
-} catch (Throwable $wyjatek) {
-    // Bez logowania treści zgłoszenia i szczegółów SMTP — komunikat neutralny.
+        $mailer->send();
+        $wyslano = true;
+    } catch (Throwable $wyjatek) {
+        // Bez logowania treści zgłoszenia i szczegółów SMTP — spróbujemy transportem zapasowym.
+        $wyslano = false;
+    }
+}
+
+// Transport zapasowy: funkcja mail() serwera. Działa bez konfiguracji SMTP,
+// dzięki czemu formularz dostarcza zgłoszenia od razu po wgraniu na hosting.
+if (!$wyslano) {
+    $nadawcaZapasowy = 'formularz@' . $domenaNadawcy;
+    $naglowki = implode("\r\n", [
+        'From: Formularz strony <' . $nadawcaZapasowy . '>',
+        'Reply-To: ' . $email,
+        'MIME-Version: 1.0',
+        'Content-Type: text/plain; charset=UTF-8',
+        'Content-Transfer-Encoding: 8bit',
+        'X-Mailer: kontakt.php',
+    ]);
+    $tematZakodowany = '=?UTF-8?B?' . base64_encode($temat) . '?=';
+    $wyslano = @mail(ODBIORCA, $tematZakodowany, $tresc, $naglowki, '-f' . $nadawcaZapasowy);
+}
+
+if (!$wyslano) {
     pokaz_komunikat(
         500,
         'Nie udało się wysłać wiadomości',
