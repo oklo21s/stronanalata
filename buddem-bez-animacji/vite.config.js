@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/buddem-bez-animacji/",
+  base: "./",
   build: {
     cssMinify: true,
     sourcemap: false,

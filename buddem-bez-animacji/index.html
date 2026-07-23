@@ -15,11 +15,11 @@
       content="Układ informacji dużego generalnego wykonawcy na jednej stronie. Marka fikcyjna, dane przykładowe."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="%BASE_URL%assets/hero-budowa-koncept.svg" />
-    <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml" />
+    <meta property="og:image" content="./assets/hero-budowa-koncept.svg" />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
     <link
       rel="preload"
-      href="%BASE_URL%assets/hero-budowa-koncept.svg"
+      href="./assets/hero-budowa-koncept.svg"
       as="image"
       fetchpriority="high"
     />
@@ -120,8 +120,8 @@
       <section class="hero" id="top" aria-labelledby="hero-title">
         <img
           class="hero-media"
-          src="%BASE_URL%assets/hero-budowa-koncept.svg"
-          alt="Rysunek koncepcyjny placu budowy: żuraw wieżowy nad szkieletem budynku na ciemnym tle"
+          src="./assets/hero-budowa-koncept.svg"
+          alt=""
           width="1536"
           height="1024"
           fetchpriority="high"
@@ -151,7 +151,6 @@
             </div>
           </div>
         </div>
-        <p class="concept-label">Wizualizacja koncepcyjna</p>
       </section>
 
       <section class="utility-band" aria-label="Podstawowe informacje o projekcie">
@@ -197,13 +196,12 @@
           </div>
           <figure class="intro__figure">
             <img
-              src="%BASE_URL%assets/mapa-koncept.svg"
-              alt="Schemat poglądowy obszaru działania: jasny wielobok z zaznaczonymi punktami budów i pierścieniami zasięgu"
+              src="./assets/mapa-koncept.svg"
+              alt=""
               width="1200"
               height="900"
               loading="lazy"
             />
-            <figcaption>Schemat poglądowy — rozmieszczenie budów jest przykładowe</figcaption>
           </figure>
         </div>
       </section>
@@ -319,8 +317,8 @@
       <section class="career" id="kariera" aria-labelledby="career-title" data-reveal>
         <img
           class="career__media"
-          src="%BASE_URL%assets/kariera-koncept.svg"
-          alt="Rysunek koncepcyjny dwóch osób w żółtych kaskach na tle rusztowania"
+          src="./assets/kariera-koncept.svg"
+          alt=""
           width="1536"
           height="1024"
           loading="lazy"
@@ -349,7 +347,6 @@
             </a>
           </div>
         </div>
-        <p class="concept-label concept-label--career">Wizualizacja koncepcyjna</p>
       </section>
 
       <section class="stats stats--second" aria-labelledby="scale-title" data-reveal>
@@ -416,13 +413,12 @@
         <div class="page-shell process__grid">
           <figure class="editorial-image">
             <img
-              src="%BASE_URL%assets/realizacje-koncept.svg"
-              alt="Rysunek koncepcyjny mostu podwieszanego z dwoma pylonami i żółtymi wantami"
+              src="./assets/realizacje-koncept.svg"
+              alt=""
               width="1536"
               height="1024"
               loading="lazy"
             />
-            <figcaption>Wizualizacja koncepcyjna — nie przedstawia wykonanego obiektu</figcaption>
           </figure>
           <div class="process__copy">
             <p class="eyebrow">Przebieg kontraktu</p>
@@ -633,5 +629,32 @@
     </a>
 
     <script type="module" src="/src/main.js"></script>
-  </body>
+      <script>
+      /* Awaryjne domkniecie sciezek assetow.
+         Gdy strone otwiera sie jako surowy plik (file://), Vite nie podmienia
+         %BASE_URL%, wiec assety sie nie laduja. Wtedy kierujemy je do public/.
+         W wersji budowanej/serwowanej %BASE_URL% jest juz podmienione - brak
+         dopasowan, wiec skrypt nic nie robi. */
+      (function () {
+        function fix() {
+          var els = document.querySelectorAll(
+            '[src*="%BASE_URL%"],[href*="%BASE_URL%"],[content*="%BASE_URL%"]'
+          );
+          for (var i = 0; i < els.length; i++) {
+            ["src", "href", "content"].forEach(function (a) {
+              var v = els[i].getAttribute(a);
+              if (v && v.indexOf("%BASE_URL%") !== -1) {
+                els[i].setAttribute(a, v.replace(/%BASE_URL%/g, "public/"));
+              }
+            });
+          }
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", fix);
+        } else {
+          fix();
+        }
+      })();
+    </script>
+</body>
 </html>
