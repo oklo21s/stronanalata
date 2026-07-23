@@ -1,27 +1,20 @@
 # Adresy dem w sekcji Realizacje
 
-Sekcja `#realizacje` w `index.html` linkuje 5 kafelków do żywych dem na Netlify.
-**Stan: adresy wstawione i zweryfikowane (żywe, HTTP 200).** Placeholderów `example.com`
-już nie ma.
+Sekcja `#realizacje` w `index.html` linkuje 5 kafelków do żywych dem pod `stronanalata.pl`
+(hosting Coolify, path-based). Stare adresy Netlify zostały wycofane.
 
-## Lista adresów (mapowanie po treści demo, nie po nazwie sajta)
+## Lista adresów (mapowanie po treści demo)
 
-| `data-demo`            | Katalog źródłowy demo             | URL                                    |
-| ---------------------- | --------------------------------- | -------------------------------------- |
-| `buddem`               | `dema stron/buddem/`              | https://budden.netlify.app/            |
-| `buddem-bez-animacji`  | `dema stron/buddem-bez-animacji/` | https://budden-animacja.netlify.app/   |
-| `krojnia`              | `dema stron/marka_wlasna/`        | https://marka-wlasna.netlify.app/      |
-| `muzeum`               | `dema stron/muzeum_bezdanych/`    | https://muzeum.netlify.app/            |
-| `muzeum-plakat`        | `dema stron/muzeum_bezdanych_v2/` | https://muzeumv2.netlify.app/          |
+| `data-demo`            | Katalog źródłowy demo             | URL                                        |
+| ---------------------- | --------------------------------- | ------------------------------------------ |
+| `buddem`               | `dema stron/buddem/`              | https://stronanalata.pl/buddem             |
+| `buddem-bez-animacji`  | `dema stron/buddem-bez-animacji/` | https://stronanalata.pl/buddem-bez-animacji |
+| `krojnia`              | `dema stron/marka_wlasna/`        | https://stronanalata.pl/krojnia            |
+| `muzeum`               | `dema stron/muzeum_bezdanych/`    | https://stronanalata.pl/muzeum             |
+| `muzeum-plakat`        | `dema stron/muzeum_bezdanych_v2/` | https://stronanalata.pl/muzeum-plakat      |
 
-## ⚠️ Uwaga: nazwy Netlify są odwrócone względem treści
-
-- `budden.netlify.app` serwuje wersję **z** animacją wejścia → kafelek `buddem`.
-- `budden-animacja.netlify.app` ma w tytule „BudDem **bez** animacji" → kafelek `buddem-bez-animacji`.
-
-Mapowanie w `index.html` jest zrobione po **treści** (co pokazuje demo), więc jest
-poprawne mimo mylących nazw subdomen. Gdybyś kiedyś zmieniał adresy, patrz na treść,
-nie na nazwę sajta.
+Mapowanie w `index.html` jest zrobione po **treści** (co pokazuje demo), nie po nazwie
+katalogu — np. `marka_wlasna` serwuje markę „Krojnia" pod ścieżką `/krojnia`.
 
 ## Gdy zmienisz adresy demo
 
