@@ -33,6 +33,54 @@
   color: var(--yellow);
 }
 
+/* Sekcje-akcenty mają STAŁE tło (ciemne pod obrazkiem/blokiem albo żółte) i nie
+   uczestniczą w odwróceniu motywu. Bez tego token tekstu (--ink/--paper) odwracał
+   się względem stałego tła i tekst znikał: nagłówek hero i kariery, liczby na
+   żółtym paśmie, notka o galerii, kontakt, marka w stopce, pasek mobilny i intro.
+   Przypinamy tu stałe barwy, żeby kontrast był poprawny w obu motywach. */
+:root[data-theme="dark"] .hero,
+:root[data-theme="dark"] .career,
+:root[data-theme="dark"] .gallery-note,
+:root[data-theme="dark"] .contact {
+  background: #12181d;
+  color: #eef2f5;
+}
+
+:root[data-theme="dark"] .utility-band {
+  background: #1b232a;
+  color: #eef2f5;
+}
+
+/* Jasne linki/marka na tych sekcjach nie mogą pociemnieć razem z --paper. */
+:root[data-theme="dark"] .text-link--light {
+  color: #eef2f5;
+}
+
+:root[data-theme="dark"] .brand--footer .brand-copy strong {
+  color: #ffffff;
+}
+
+/* Chip ikony w kartach obszarów trzyma ciemne tło, żeby żółta ikona miała kontrast. */
+:root[data-theme="dark"] .area-card__icon {
+  background: #12181d;
+}
+
+/* Żółte tła (pasma liczb, pasek mobilny) wymagają ciemnego tekstu. */
+:root[data-theme="dark"] .stats,
+:root[data-theme="dark"] .mobile-call-bar {
+  color: #12181d;
+}
+
+/* Nakładka intro: panele ciemne, napis jasny — jak w motywie jasnym. */
+:root[data-theme="dark"] .intro-panel {
+  background: #12181d;
+}
+
+:root[data-theme="dark"] .intro-wordmark,
+:root[data-theme="dark"] .intro-skip {
+  color: #eef2f5;
+}
+
 *,
 *::before,
 *::after {
