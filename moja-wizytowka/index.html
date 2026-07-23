@@ -30,7 +30,7 @@
     <a class="skip-link" href="#main">Przejdź do treści</a>
 
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="Mikołaj Oczkowski — początek strony">
+      <a class="brand" href="/" aria-label="Mikołaj Oczkowski — początek strony">
         <img class="brand__mark" src="/assets/logo-mark.png" width="256" height="256" alt="">
         <span class="brand__copy"><b>Mikołaj Oczkowski</b><small>projektowanie stron</small></span>
       </a>
@@ -47,12 +47,12 @@
         </button>
 
         <nav class="site-nav" id="site-nav" aria-label="Główna nawigacja">
-          <a href="#o-mnie">O mnie</a>
-          <a href="#uslugi">Usługi</a>
-          <a href="#proces">Proces</a>
-          <a href="#realizacje">Realizacje</a>
-          <a href="#faq">Pytania</a>
-          <a class="nav-cta" href="#kontakt">Napisz do mnie <span aria-hidden="true">→</span></a>
+          <a href="/o-mnie">O mnie</a>
+          <a href="/uslugi">Usługi</a>
+          <a href="/proces">Proces</a>
+          <a href="/realizacje">Realizacje</a>
+          <a href="/faq">Pytania</a>
+          <a class="nav-cta" href="/kontakt">Napisz do mnie <span aria-hidden="true">→</span></a>
         </nav>
       </div>
     </header>
@@ -64,8 +64,8 @@
           <h1 id="hero-title">Projektuję strony, które prowadzą <em>prosto do kontaktu.</em></h1>
           <p class="hero__lead">Projektuję i tworzę lekkie, nowoczesne strony internetowe dla małych firm — z jasną ofertą i prostą drogą do kontaktu.</p>
           <div class="hero__actions">
-            <a class="button button--primary" href="#kontakt">Opowiedz o swojej firmie <span aria-hidden="true">↗</span></a>
-            <a class="button button--secondary" href="#uslugi">Zobacz, co robię</a>
+            <a class="button button--primary" href="/kontakt">Zamów bezpłatną wycenę <span aria-hidden="true">↗</span></a>
+            <a class="button button--secondary" href="/uslugi">Zobacz, co robię</a>
           </div>
           <div class="hero__availability">
             <span class="status-dot" aria-hidden="true"></span>
@@ -128,10 +128,10 @@
             <ul class="service-card__list">
               <li>Jeden mocny ekran z ofertą i wezwaniem do kontaktu</li>
               <li>Treść ułożona pod jedno działanie: e-mail lub telefon</li>
-              <li>Wersja na telefon projektowana w pierwszej kolejności</li>
+              <li>Na telefonie klient dzwoni lub pisze jednym dotknięciem</li>
               <li>Podgląd w Google i ładny link w komunikatorach</li>
             </ul>
-            <span class="service-card__status">Projekt i wykonanie · wycena bezpłatna</span>
+            <span class="service-card__status">Projekt i wykonanie · od 600 zł</span>
           </article>
 
           <article class="service-card service-card--dark" data-reveal>
@@ -141,11 +141,11 @@
             <p>Rozbudowana oferta z indywidualną liczbą podstron oraz — zależnie od potrzeb — formularzami, integracjami lub CMS-em.</p>
             <ul class="service-card__list">
               <li>Kilka podstron: oferta, realizacje, kontakt</li>
-              <li>Formularz kontaktowy z ochroną przed spamem</li>
+              <li>Zapytania klientów trafiają prosto na Twój e-mail, nie giną w spamie</li>
               <li>Teksty przygotowane wspólnie na podstawie Twoich odpowiedzi</li>
               <li>Podstawy widoczności w wyszukiwarce Google</li>
             </ul>
-            <span class="service-card__status">Rozbudowana oferta · wycena bezpłatna</span>
+            <span class="service-card__status">Rozbudowana oferta · wycena po analizie</span>
           </article>
 
           <article class="service-card" data-reveal>
@@ -154,13 +154,35 @@
             <h3>Poprawa istniejącej strony</h3>
             <p>Zakres, technologię i liczbę poprawek ustalam po sprawdzeniu strony. Jeśli naprawa nie pozwoli spełnić uzgodnionych wymagań, rekomenduję nową realizację.</p>
             <ul class="service-card__list">
-              <li>Przegląd obecnej strony i lista rzeczy do poprawy</li>
+              <li>Dowiesz się, co na obecnej stronie zniechęca klientów</li>
               <li>Uzgodniony zakres zmian z ceną i terminem</li>
               <li>Te same testy przed publikacją co przy nowej stronie</li>
               <li>Uczciwa rekomendacja, gdy naprawa się nie opłaca</li>
             </ul>
-            <span class="service-card__status">Audyt i poprawki · wycena bezpłatna</span>
+            <span class="service-card__status">Audyt i poprawki · wycena zależna od zakresu</span>
           </article>
+        </div>
+
+        <div class="compare" data-reveal aria-labelledby="compare-title">
+          <p class="kicker">Po co, skoro jest kreator?</p>
+          <h3 id="compare-title">Gotowy kreator czy strona zrobiona pod Ciebie</h3>
+          <dl class="compare__rows">
+            <div>
+              <dt>Układ</dt>
+              <dd class="compare__them">Jeden z tysięcy szablonów, których używa wielu innych</dd>
+              <dd class="compare__me">Układ projektowany pod Twoją ofertę i jednego klienta</dd>
+            </div>
+            <div>
+              <dt>Szybkość</dt>
+              <dd class="compare__them">Doładowywany skryptami i reklamami platformy</dd>
+              <dd class="compare__me">Lekki kod z małą liczbą zależności</dd>
+            </div>
+            <div>
+              <dt>Treść</dt>
+              <dd class="compare__them">Sam wpisujesz tekst w gotowe pola</dd>
+              <dd class="compare__me">Treść układana pod jedno działanie klienta</dd>
+            </div>
+          </dl>
         </div>
       </section>
 
@@ -186,62 +208,66 @@
 
         <div class="project-grid">
           <article class="project-card" data-reveal>
-            <a class="project-card__visual" href="https://stronanalata.pl/buddem" target="_blank" rel="noopener" data-demo="buddem" aria-label="Otwórz demo BudDem w nowej karcie">
+            <a class="project-card__visual" href="https://stronanalata.pl/buddem" data-demo="buddem" aria-label="Otwórz demo BudDem">
               <img src="/assets/project-buddem.svg" width="720" height="450" loading="lazy" decoding="async" alt="Podgląd strony demonstracyjnej firmy budowlanej BudDem">
             </a>
             <div class="project-card__meta">
               <p class="project-card__tag">Budowlanka · projekt pokazowy · marka fikcyjna</p>
               <h3>Ciemny, techniczny układ — oferta i realizacje przed historią firmy.</h3>
-              <a class="project-card__link" href="https://stronanalata.pl/buddem" target="_blank" rel="noopener" data-demo="buddem">Otwórz demo <span aria-hidden="true">↗</span></a>
+              <dl class="project-card__story">
+                <div><dt>Zamysł</dt><dd>firma budowlana ginie wśród podobnych, ogólnikowych stron.</dd></div>
+                <div><dt>Decyzja</dt><dd>na wierzch oferta i realizacje, historia firmy niżej.</dd></div>
+                <div><dt>Efekt</dt><dd>pierwszy ekran mówi „konkret", a nie „ozdoba".</dd></div>
+              </dl>
+              <a class="project-card__link" href="https://stronanalata.pl/buddem" data-demo="buddem">Otwórz demo <span aria-hidden="true">↗</span></a>
             </div>
           </article>
 
           <article class="project-card" data-reveal>
-            <a class="project-card__visual" href="https://stronanalata.pl/buddem-bez-animacji" target="_blank" rel="noopener" data-demo="buddem-bez-animacji" aria-label="Otwórz demo BudDem bez animacji w nowej karcie">
+            <a class="project-card__visual" href="https://stronanalata.pl/buddem-bez-animacji" data-demo="buddem-bez-animacji" aria-label="Otwórz demo BudDem bez animacji">
               <img src="/assets/project-buddem-static.svg" width="720" height="450" loading="lazy" decoding="async" alt="Podgląd strony demonstracyjnej BudDem w wariancie bez animacji wejścia">
             </a>
             <div class="project-card__meta">
               <p class="project-card__tag">Budowlanka · wariant bez animacji · marka fikcyjna</p>
               <h3>Ta sama strona bez animacji wejścia — pierwszy ekran gotowy natychmiast.</h3>
-              <a class="project-card__link" href="https://stronanalata.pl/buddem-bez-animacji" target="_blank" rel="noopener" data-demo="buddem-bez-animacji">Otwórz demo <span aria-hidden="true">↗</span></a>
+              <a class="project-card__link" href="https://stronanalata.pl/buddem-bez-animacji" data-demo="buddem-bez-animacji">Otwórz demo <span aria-hidden="true">↗</span></a>
             </div>
           </article>
 
           <article class="project-card" data-reveal>
-            <a class="project-card__visual" href="https://stronanalata.pl/krojnia" target="_blank" rel="noopener" data-demo="krojnia" aria-label="Otwórz demo Krojnia w nowej karcie">
+            <a class="project-card__visual" href="https://stronanalata.pl/krojnia" data-demo="krojnia" aria-label="Otwórz demo Krojnia">
               <img src="/assets/project-krojnia.svg" width="720" height="450" loading="lazy" decoding="async" alt="Podgląd strony demonstracyjnej marki odzieżowej Krojnia">
             </a>
             <div class="project-card__meta">
               <p class="project-card__tag">Odzież · projekt pokazowy · marka fikcyjna</p>
               <h3>Ciepła paleta i mocna typografia — produkt przed opisem marki.</h3>
-              <a class="project-card__link" href="https://stronanalata.pl/krojnia" target="_blank" rel="noopener" data-demo="krojnia">Otwórz demo <span aria-hidden="true">↗</span></a>
+              <a class="project-card__link" href="https://stronanalata.pl/krojnia" data-demo="krojnia">Otwórz demo <span aria-hidden="true">↗</span></a>
             </div>
           </article>
 
           <article class="project-card" data-reveal>
-            <a class="project-card__visual" href="https://stronanalata.pl/muzeum" target="_blank" rel="noopener" data-demo="muzeum" aria-label="Otwórz demo Muzeum Miasta Lipowo w nowej karcie">
+            <a class="project-card__visual" href="https://stronanalata.pl/muzeum" data-demo="muzeum" aria-label="Otwórz demo Muzeum Miasta Lipowo">
               <img src="/assets/project-muzeum.svg" width="720" height="450" loading="lazy" decoding="async" alt="Podgląd strony demonstracyjnej muzeum miejskiego w wersji stonowanej">
             </a>
             <div class="project-card__meta">
               <p class="project-card__tag">Kultura · projekt pokazowy · marka fikcyjna</p>
               <h3>Muzeum miejskie w spokojnej odsłonie — godziny i bilety od razu widoczne.</h3>
-              <a class="project-card__link" href="https://stronanalata.pl/muzeum" target="_blank" rel="noopener" data-demo="muzeum">Otwórz demo <span aria-hidden="true">↗</span></a>
+              <a class="project-card__link" href="https://stronanalata.pl/muzeum" data-demo="muzeum">Otwórz demo <span aria-hidden="true">↗</span></a>
             </div>
           </article>
 
           <article class="project-card" data-reveal>
-            <a class="project-card__visual" href="https://stronanalata.pl/muzeum-plakat" target="_blank" rel="noopener" data-demo="muzeum-plakat" aria-label="Otwórz demo Muzeum Miasta Lipowo w wariancie plakatowym w nowej karcie">
+            <a class="project-card__visual" href="https://stronanalata.pl/muzeum-plakat" data-demo="muzeum-plakat" aria-label="Otwórz demo Muzeum Miasta Lipowo w wariancie plakatowym">
               <img src="/assets/project-muzeum-plakat.svg" width="720" height="450" loading="lazy" decoding="async" alt="Podgląd strony demonstracyjnej muzeum miejskiego w wariancie plakatowym">
             </a>
             <div class="project-card__meta">
               <p class="project-card__tag">Kultura · wariant plakatowy · marka fikcyjna</p>
               <h3>To samo muzeum jak afisz — mocny akcent i typografia jak na plakacie.</h3>
-              <a class="project-card__link" href="https://stronanalata.pl/muzeum-plakat" target="_blank" rel="noopener" data-demo="muzeum-plakat">Otwórz demo <span aria-hidden="true">↗</span></a>
+              <a class="project-card__link" href="https://stronanalata.pl/muzeum-plakat" data-demo="muzeum-plakat">Otwórz demo <span aria-hidden="true">↗</span></a>
             </div>
           </article>
         </div>
 
-        <p class="projects__note" data-reveal>Linki otwierają żywe wersje w nowej karcie. Podglądy powyżej są lekkimi miniaturami układu, nie zdjęciami ekranu.</p>
       </section>
 
       <section class="section standards" aria-labelledby="standards-title">
@@ -251,10 +277,10 @@
           <h2 id="standards-title">To ma działać również wtedy, <em>gdy nikt nie patrzy na animacje.</em></h2>
         </div>
         <dl class="proof-strip" data-reveal>
-          <div><dt>6/6</dt><dd>testów interakcji przechodzi przed oddaniem</dd></div>
-          <div><dt>0</dt><dd>cudzych trackerów i zewnętrznych skryptów</dd></div>
-          <div><dt>0</dt><dd>znanych podatności w audycie zależności</dd></div>
-          <div><dt>20 000</dt><dd>przełączeń menu bez błędu w teście stabilności</dd></div>
+          <div><dt>6/6</dt><dd>kontroli działania przechodzi, zanim strona trafi do Ciebie</dd></div>
+          <div><dt>0</dt><dd>cudzych trackerów — nie handluję Twoimi danymi</dd></div>
+          <div><dt>0</dt><dd>znanych luk w użytych składnikach strony</dd></div>
+          <div><dt>20 000</dt><dd>przełączeń menu bez awarii w teście — nic się nie zacina</dd></div>
         </dl>
         <div class="standards-grid">
           <article data-reveal><span>mobile / 01</span><h3>Najpierw telefon</h3><p>Oferta i kontakt muszą być czytelne na małym ekranie bez powiększania.</p></article>
@@ -271,7 +297,7 @@
             <p class="kicker">FAQ</p>
             <h2 id="faq-title">Zanim napiszesz.</h2>
             <p>Cenę i ostateczny termin ustalam po poznaniu zakresu oraz potrzebnych funkcji.</p>
-            <a class="text-link" href="#kontakt">Zadaj własne pytanie <span aria-hidden="true">→</span></a>
+            <a class="text-link" href="/kontakt">Zadaj własne pytanie <span aria-hidden="true">→</span></a>
           </div>
           <div class="faq-list" data-reveal>
             <details class="faq-item"><summary><span>01</span><b>Ile kosztuje strona i kiedy następuje płatność?</b><i aria-hidden="true"></i></summary><p>Stronę i ewentualny audyt wyceniam indywidualnie po poznaniu zakresu. Płatność za realizację następuje po zakończeniu uzgodnionych prac, zgodnie z wcześniej zaakceptowaną wyceną.</p></details>
@@ -279,8 +305,17 @@
             <details class="faq-item"><summary><span>03</span><b>Co jeśli nie mam tekstów i zdjęć?</b><i aria-hidden="true"></i></summary><p>Tekst można przygotować na podstawie odpowiedzi o firmie. Sposób pozyskania zdjęć lub ilustracji trzeba ustalić przed wyceną.</p></details>
             <details class="faq-item"><summary><span>04</span><b>Czy pomożesz z publikacją?</b><i aria-hidden="true"></i></summary><p>Tak. Hosting i domenę kupujesz na własne konto, a ja mogę pomóc w wyborze, konfiguracji i opublikowaniu strony.</p></details>
             <details class="faq-item"><summary><span>05</span><b>Czy zajmujesz się stroną po publikacji?</b><i aria-hidden="true"></i></summary><p>Tak. Zakres i okres opieki uwzględnionej w cenie ustalam przed rozpoczęciem projektu. Obejmuje ona doprowadzenie uzgodnionego zakresu do zaakceptowanego stanu; dodatkowe funkcje wyceniam osobno. Zgłoszenia obsługuję od poniedziałku do piątku w godz. 10:00–18:00, a pracę nad nimi rozpoczynam najpóźniej w ciągu dwóch dni roboczych.</p></details>
+            <details class="faq-item"><summary><span>06</span><b>Czy ustalamy warunki na piśmie?</b><i aria-hidden="true"></i></summary><p>Tak. Zanim zacznę, potwierdzamy na piśmie zakres, cenę i termin. Dzięki temu obie strony wiedzą, co jest umówione, a Ty nie płacisz za nic, na co wcześniej się nie zgodziłeś.</p></details>
           </div>
         </div>
+      </section>
+
+      <section class="trust-strip" aria-label="Zasady współpracy" data-reveal>
+        <ul>
+          <li><b>Ustalenia na piśmie</b><span>Zakres, cenę i termin potwierdzamy, zanim zacznę pracę.</span></li>
+          <li><b>Pracuję, aż zaakceptujesz</b><span>Uzgodniony zakres doprowadzam do stanu, który zatwierdzasz.</span></li>
+          <li><b>Bez cudzych trackerów</b><span>Nie handluję Twoimi danymi ani danymi Twoich klientów.</span></li>
+        </ul>
       </section>
 
       <section class="contact" id="kontakt" aria-labelledby="contact-title">
@@ -290,8 +325,8 @@
           <div class="contact__copy" data-reveal>
             <p class="kicker kicker--on-orange">Pierwszy krok</p>
             <h2 id="contact-title">Pokaż mi swoją firmę.<br>Odpowiem konkretnie.</h2>
-            <p>Napisz bezpośrednio albo skorzystaj z formularza. Opisz firmę, potrzebny zakres i najważniejszy cel strony. Zwykle odpowiadam w ciągu 24 godzin.</p>
-            <dl class="contact-data"><div><dt>E-mail</dt><dd><a href="mailto:mikolajoczkowski42@gmail.com">mikolajoczkowski42@gmail.com</a></dd></div><div><dt>Lokalizacja</dt><dd>Kozienice · cała Polska</dd></div><div><dt>Obsługa zgłoszeń</dt><dd>pon.–pt. · 10:00–18:00</dd></div></dl>
+            <p>Napisz, zadzwoń albo skorzystaj z formularza. Opisz firmę, potrzebny zakres i najważniejszy cel strony. Wycena jest bezpłatna i niezobowiązująca — zwykle odpowiadam w ciągu 24 godzin.</p>
+            <dl class="contact-data"><div><dt>E-mail</dt><dd><a href="mailto:mikolajoczkowski42@gmail.com">mikolajoczkowski42@gmail.com</a></dd></div><div><dt>Telefon</dt><dd><a href="tel:+48452448277">452 448 277</a></dd></div><div><dt>Lokalizacja</dt><dd>Kozienice · cała Polska</dd></div><div><dt>Obsługa zgłoszeń</dt><dd>pon.–pt. · 10:00–18:00</dd></div></dl>
           </div>
 
           <form class="contact-form" name="kontakt-wizytowka" method="POST" action="/kontakt.php" accept-charset="UTF-8" aria-describedby="form-privacy" data-reveal>
@@ -307,12 +342,14 @@
       </section>
     </main>
 
+    <a class="sticky-cta" href="/kontakt">Napisz do mnie <span aria-hidden="true">↗</span></a>
+
     <footer class="site-footer">
       <div class="site-footer__accent" aria-hidden="true"></div>
       <div class="site-footer__main">
-        <a class="brand brand--footer" href="#top"><img class="brand__mark" src="/assets/logo-mark.png" width="256" height="256" alt=""><span class="brand__copy"><b>Mikołaj Oczkowski</b><small>projektowanie stron</small></span></a>
+        <a class="brand brand--footer" href="/"><img class="brand__mark" src="/assets/logo-mark.png" width="256" height="256" alt=""><span class="brand__copy"><b>Mikołaj Oczkowski</b><small>projektowanie stron</small></span></a>
         <p>Osobista wizytówka twórcy lekkich stron dla małych firm.</p>
-        <nav aria-label="Nawigacja w stopce"><a href="#o-mnie">O mnie</a><a href="#uslugi">Usługi</a><a href="#proces">Proces</a><a href="#realizacje">Realizacje</a><a href="#kontakt">Kontakt</a><a href="/polityka-prywatnosci.html">Prywatność</a></nav>
+        <nav aria-label="Nawigacja w stopce"><a href="/o-mnie">O mnie</a><a href="/uslugi">Usługi</a><a href="/proces">Proces</a><a href="/realizacje">Realizacje</a><a href="/kontakt">Kontakt</a><a href="tel:+48452448277">Tel. 452 448 277</a><a href="/polityka-prywatnosci.html">Prywatność</a></nav>
         <p class="footer-status"><span aria-hidden="true"></span> Kozienice · cała Polska</p>
       </div>
       <div class="site-footer__bottom"><p>© 2026 Mikołaj Oczkowski</p><p>Bez analityki i zewnętrznych trackerów.</p></div>

@@ -58,7 +58,8 @@ check(!/nieoficjalny prototyp/i.test(html), 'Baner nieoficjalnego prototypu nie 
 check(!/\[[^\]]+\]/.test(html), 'W publikowanym HTML pozostał placeholder w nawiasach kwadratowych.');
 check(/Mikołaj Oczkowski/i.test(html), 'Brakuje potwierdzonego imienia i nazwiska.');
 check(/href="mailto:mikolajoczkowski42@gmail\.com"/i.test(html), 'Brakuje prawidłowego linku mailto:.');
-check(!/href="tel:/i.test(html), 'Telefon miał zostać pominięty, ale strona zawiera link tel:.');
+check(/href="tel:\+48452448277"/i.test(html), 'Brakuje klikalnego linku tel: do potwierdzonego numeru telefonu.');
+check(count(html, /href="tel:\+48452448277"/gi) === 2, 'Telefon powinien być klikalny dokładnie w Kontakcie i w stopce.');
 
 check(/<form[^>]+action="\/kontakt\.php"/i.test(html), 'Formularz nie wysyła danych do backendu /kontakt.php.');
 check(/<form[^>]+method="POST"/i.test(html), 'Formularz nie używa metody POST.');

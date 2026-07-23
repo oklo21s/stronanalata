@@ -54,6 +54,98 @@ export function initTheme(root = document) {
   return () => button.removeEventListener('click', onClick);
 }
 
+export function initRouting(root = document) {
+  const view = root.defaultView ?? globalThis.window;
+  if (!view) return () => {};
+
+  // Czyste adresy sekcji zamiast kotwic #. Serwer (.htaccess) serwuje na nich
+  // index.html, a poniższy kod przewija do właściwej sekcji i aktualizuje adres.
+  const routes = {
+    '/': 'top',
+    '/o-mnie': 'o-mnie',
+    '/uslugi': 'uslugi',
+    '/proces': 'proces',
+    '/realizacje': 'realizacje',
+    '/faq': 'faq',
+    '/kontakt': 'kontakt',
+  };
+
+  const header = root.querySelector('.site-header');
+  const reduced = view.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+  const scrollToPath = (path, smooth) => {
+    const id = routes[path];
+    if (!id) return;
+    const behavior = smooth && !reduced ? 'smooth' : 'auto';
+    if (id === 'top') {
+      view.scrollTo({ top: 0, behavior });
+      return;
+    }
+    const target = root.getElementById(id);
+    if (!target) return;
+    const offset = (header?.offsetHeight ?? 0) + 12;
+    const top = target.getBoundingClientRect().top + view.scrollY - offset;
+    view.scrollTo({ top: Math.max(top, 0), behavior });
+  };
+
+  const onClick = (event) => {
+    if (event.defaultPrevented || event.button !== 0) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const anchor = event.target.closest?.('a[href]');
+    if (!anchor || anchor.target === '_blank' || anchor.hasAttribute('download')) return;
+
+    let url;
+    try { url = new view.URL(anchor.href); } catch { return; }
+    // Kotwice w obrębie strony (np. skip-link #main) zostawiamy przeglądarce.
+    if (url.hash || url.origin !== view.location.origin) return;
+    if (!(url.pathname in routes)) return;
+
+    event.preventDefault();
+    if (url.pathname !== view.location.pathname) view.history.pushState({}, '', url.pathname);
+    scrollToPath(url.pathname, true);
+  };
+
+  const onPopState = () => scrollToPath(view.location.pathname, false);
+
+  root.addEventListener('click', onClick);
+  view.addEventListener('popstate', onPopState);
+
+  // Wejście wprost lub odświeżenie na /faq, /uslugi itd. — przewiń po ułożeniu layoutu.
+  if (view.location.pathname !== '/' && view.location.pathname in routes) {
+    view.requestAnimationFrame?.(() => scrollToPath(view.location.pathname, false));
+  }
+
+  return () => {
+    root.removeEventListener('click', onClick);
+    view.removeEventListener('popstate', onPopState);
+  };
+}
+
+export function initStickyCta(root = document) {
+  const cta = root.querySelector('.sticky-cta');
+  const contact = root.querySelector('#kontakt');
+  if (!cta || !contact) return () => {};
+
+  const view = root.defaultView ?? globalThis.window;
+  if (typeof view?.IntersectionObserver !== 'function') return () => {};
+
+  // Chowamy pływający przycisk, gdy widać sekcję kontaktu lub stopkę —
+  // żeby nie zasłaniał formularza ani treści na dole strony.
+  const footer = root.querySelector('.site-footer');
+  const visible = new Set();
+  const observer = new view.IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) visible.add(entry.target);
+      else visible.delete(entry.target);
+    });
+    cta.classList.toggle('is-hidden', visible.size > 0);
+  }, { rootMargin: '0px 0px -35% 0px' });
+
+  observer.observe(contact);
+  if (footer) observer.observe(footer);
+  return () => observer.disconnect();
+}
+
 export function initReveal(root = document) {
   const elements = [...root.querySelectorAll('[data-reveal]')];
   if (!elements.length) return () => {};

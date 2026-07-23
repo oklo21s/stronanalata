@@ -6,6 +6,16 @@ AddDefaultCharset UTF-8
 
 ErrorDocument 404 /404.html
 
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # Czyste adresy sekcji strony jednostronicowej -> serwuj index.html.
+  # Wejście wprost lub odświeżenie na /faq, /uslugi itd. nie daje 404;
+  # JavaScript po załadowaniu przewija do właściwej sekcji.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(o-mnie|uslugi|proces|realizacje|faq|kontakt)/?$ /index.html [L]
+</IfModule>
+
 <IfModule mod_headers.c>
   Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"

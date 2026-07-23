@@ -1011,14 +1011,6 @@ h2 em {
 .project-card__link:hover { text-decoration: underline; }
 .project-card:hover .project-card__link span { transform: translate(2px, -2px); }
 
-.projects__note {
-  max-width: var(--content);
-  margin: 1.8rem auto 0;
-  color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-}
-
 .faq { border-top: 1px solid var(--border); background: var(--surface-alt); }
 
 .faq__layout {
@@ -1306,6 +1298,119 @@ h2 em {
 
 .site-footer__bottom p { margin: 0; color: #7f8793; font-size: 0.62rem; }
 
+/* Porównanie: kreator vs strona pod Ciebie (B3) */
+.compare {
+  max-width: var(--content);
+  margin: 2.6rem auto 0;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.compare .kicker { margin-bottom: 1rem; }
+.compare h3 { margin: 0 0 1.2rem; font-size: clamp(1.3rem, 2.4vw, 1.8rem); }
+.compare__rows { display: grid; gap: 0; margin: 0; }
+
+.compare__rows > div {
+  display: grid;
+  grid-template-columns: minmax(5.5rem, 0.5fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1rem;
+  align-items: start;
+  padding: 1rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.compare__rows > div:first-child { border-top: 0; }
+
+.compare__rows dt {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.compare__rows dd { margin: 0; font-size: 0.85rem; line-height: 1.45; }
+.compare__them { color: var(--muted); }
+.compare__me { position: relative; padding-left: 1.45rem; color: var(--ink); font-weight: 650; }
+
+.compare__me::before {
+  position: absolute;
+  top: 0.1em;
+  left: 0;
+  color: var(--accent-dark);
+  font-weight: 800;
+  content: "✓";
+}
+
+/* Pasek zaufania przed kontaktem (A3) */
+.trust-strip {
+  padding: clamp(1.6rem, 4vw, 2.4rem) var(--pad);
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.trust-strip ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.3rem;
+  max-width: var(--content);
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.trust-strip li { position: relative; display: grid; gap: 0.35rem; padding-left: 1.6rem; }
+
+.trust-strip li::before {
+  position: absolute;
+  top: 0.05em;
+  left: 0;
+  color: var(--accent-dark);
+  font-weight: 800;
+  content: "✓";
+}
+
+.trust-strip b { font-family: var(--font-display); font-size: 0.98rem; }
+.trust-strip span { color: var(--ink-soft); font-size: 0.8rem; line-height: 1.45; }
+
+/* Mini-historia układu na kafelku realizacji (C3) */
+.project-card__story { display: grid; gap: 0.3rem; margin: 0; padding-top: 0.15rem; }
+.project-card__story > div { display: grid; grid-template-columns: 4.4rem 1fr; gap: 0.6rem; }
+
+.project-card__story dt {
+  padding-top: 0.15rem;
+  color: var(--accent-dark);
+  font-family: var(--font-mono);
+  font-size: 0.54rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.project-card__story dd { margin: 0; color: var(--ink-soft); font-size: 0.76rem; line-height: 1.4; }
+
+/* Pływające CTA na wąskich ekranach (C4) */
+.sticky-cta {
+  position: fixed;
+  z-index: 60;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 52px;
+  padding: 0.8rem 1.4rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--ink);
+  font-weight: 750;
+  text-decoration: none;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+}
+
 .reveal-ready [data-reveal] {
   opacity: 0;
   transform: translateY(20px);
@@ -1384,6 +1489,9 @@ h2 em {
   .work-card--top { right: 0; }
   .work-card--bottom { left: 0; }
   .skills-strip dl { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 2rem; }
+  .trust-strip ul { grid-template-columns: 1fr; gap: 1rem; }
+  .js .sticky-cta { display: inline-flex; }
+  .js .sticky-cta.is-hidden { display: none; }
 }
 
 @media (max-width: 560px) {
@@ -1404,6 +1512,8 @@ h2 em {
   .faq-item p { padding: 0 1rem 1.2rem; }
   .site-footer__main { grid-template-columns: 1fr; }
   .site-footer__bottom { align-items: flex-start; flex-direction: column; }
+  .compare__rows > div { grid-template-columns: 1fr; gap: 0.45rem; }
+  .compare__rows dt { margin-bottom: 0.15rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
