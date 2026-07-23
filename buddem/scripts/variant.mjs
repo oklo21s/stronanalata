@@ -25,8 +25,11 @@ const rules = [
   },
   {
     label: "przełącznik wersji",
-    pattern: /<a class="status-bar__switch" href="\.\/bez-intro\.html">Zobacz wersję bez animacji wejścia<\/a>/,
-    replacement: '<a class="status-bar__switch" href="./index.html">Zobacz wersję z animacją wejścia</a>',
+    // Ścieżki są absolutne (/buddem/...), bo strona bywa otwierana pod adresem
+    // bez końcowego ukośnika (stronanalata.pl/buddem) — wtedy linki względne
+    // rozwiązywałyby się do katalogu głównego domeny.
+    pattern: /<a class="status-bar__switch" href="\/buddem\/bez-intro\.html">Zobacz wersję bez animacji wejścia<\/a>/,
+    replacement: '<a class="status-bar__switch" href="/buddem/">Zobacz wersję z animacją wejścia</a>',
   },
 ];
 

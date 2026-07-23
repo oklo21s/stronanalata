@@ -7,6 +7,7 @@ import {
   bootstrap,
   easeOutCubic,
   formatStatValue,
+  initContactForm,
   initIntro,
   initStatCounters,
   setCurrentYear,
@@ -200,7 +201,7 @@ test("the no-intro version carries the same content without the overlay", () => 
   assert.equal(document.querySelectorAll(".area-card").length, 6);
   assert.equal(document.querySelectorAll("[data-count-to]").length, 8);
   assert.equal(document.querySelectorAll("h1").length, 1);
-  assert.equal(document.querySelector(".status-bar__switch").getAttribute("href"), "./index.html");
+  assert.equal(document.querySelector(".status-bar__switch").getAttribute("href"), "/buddem/");
 });
 
 test("the no-intro version bootstraps and skips the intro cleanly", () => {
@@ -286,6 +287,98 @@ test("the intro clears the screen well before the hard limit", () => {
   assert.equal(lastEndMs <= 1_400, true, `animacja trwa ${lastEndMs} ms`);
   assert.equal(hardLimit > lastEndMs, true, `limit ${hardLimit} ms nie jest po ${lastEndMs} ms`);
   assert.equal(hardLimit - lastEndMs <= 250, true, `martwy czas ${hardLimit - lastEndMs} ms`);
+});
+
+const CONTACT_FORM_HTML = `
+  <form data-contact-form method="POST" action="/kontakt.php">
+    <input name="bot-field" type="text">
+    <input name="firma" type="text">
+    <input name="email" type="email">
+    <textarea name="wiadomosc"></textarea>
+    <p data-form-status hidden></p>
+    <button type="submit">Wyślij wiadomość</button>
+  </form>`;
+
+function fillContactForm(form) {
+  form.elements.namedItem("firma").value = "Pracownia Testowa";
+  form.elements.namedItem("email").value = "test@example.com";
+  form.elements.namedItem("wiadomosc").value = "Wiadomość testowa, która ma ponad dwadzieścia znaków.";
+}
+
+async function submitContactForm(form) {
+  form.dispatchEvent(new activeWindow.Event("submit", { bubbles: true, cancelable: true }));
+  // Handler jest asynchroniczny — czekamy aż łańcuch promise się rozliczy.
+  await new Promise((resolvePromise) => setTimeout(resolvePromise, 0));
+}
+
+test("a delivered submission is confirmed inline and the form is cleared", async () => {
+  installDom(CONTACT_FORM_HTML);
+  const requests = [];
+  activeWindow.fetch = async (url, options) => {
+    requests.push({ url, options });
+    return { ok: true, status: 200 };
+  };
+
+  initContactForm();
+  const form = document.querySelector("[data-contact-form]");
+  fillContactForm(form);
+  await submitContactForm(form);
+
+  assert.equal(requests.length, 1);
+  assert.equal(String(requests[0].url).endsWith("/kontakt.php"), true);
+  assert.equal(requests[0].options.method, "POST");
+  const body = requests[0].options.body;
+  assert.equal(body.get("firma"), "Pracownia Testowa");
+  assert.equal(body.get("email"), "test@example.com");
+  assert.equal(body.get("bot-field"), "");
+
+  const status = form.querySelector("[data-form-status]");
+  assert.equal(status.hidden, false);
+  assert.equal(status.textContent.includes("wysłana"), true);
+  assert.equal(status.classList.contains("is-error"), false);
+  assert.equal(form.elements.namedItem("firma").value, "");
+  assert.equal(form.querySelector("button").disabled, false);
+});
+
+test("a rejected submission shows an error and keeps the typed message", async () => {
+  installDom(CONTACT_FORM_HTML);
+  activeWindow.fetch = async () => ({ ok: false, status: 422 });
+
+  initContactForm();
+  const form = document.querySelector("[data-contact-form]");
+  fillContactForm(form);
+  await submitContactForm(form);
+
+  const status = form.querySelector("[data-form-status]");
+  assert.equal(status.classList.contains("is-error"), true);
+  assert.equal(status.textContent.includes("od 20 do 3000"), true);
+  // Treść zostaje w polach, żeby dało się ją poprawić bez przepisywania.
+  assert.notEqual(form.elements.namedItem("wiadomosc").value, "");
+  assert.equal(form.querySelector("button").disabled, false);
+});
+
+test("a network failure fails closed with a retry message", async () => {
+  installDom(CONTACT_FORM_HTML);
+  activeWindow.fetch = async () => {
+    throw new Error("offline");
+  };
+
+  initContactForm();
+  const form = document.querySelector("[data-contact-form]");
+  fillContactForm(form);
+  await submitContactForm(form);
+
+  const status = form.querySelector("[data-form-status]");
+  assert.equal(status.classList.contains("is-error"), true);
+  assert.equal(status.textContent.includes("Brak połączenia"), true);
+  assert.equal(form.querySelector("button").disabled, false);
+});
+
+test("without fetch the handler steps aside for the native submit", () => {
+  installDom(CONTACT_FORM_HTML);
+  activeWindow.fetch = undefined;
+
+  assert.doesNotThrow(() => initContactForm());
 });
 
 test("every printed statistic matches its machine-readable target", () => {

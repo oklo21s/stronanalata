@@ -50,7 +50,7 @@
         <span><b>Marka fikcyjna</b> — brak powiązania z jakąkolwiek istniejącą firmą</span>
         <span><b>Dane przykładowe</b> — liczby służą pokazaniu układu strony</span>
         <span><b>Bez telefonu</b> — demo nie publikuje działającego numeru</span>
-        <a class="status-bar__switch" href="./index.html">Zobacz wersję z animacją wejścia</a>
+        <a class="status-bar__switch" href="/buddem/">Zobacz wersję z animacją wejścia</a>
       </div>
     </div>
 
@@ -597,6 +597,66 @@
               </small>
             </div>
           </div>
+
+          <form
+            class="contact-form"
+            method="POST"
+            action="/kontakt.php"
+            accept-charset="UTF-8"
+            aria-describedby="form-note"
+            data-contact-form
+          >
+            <p class="honeypot" aria-hidden="true">
+              <label>Nie wypełniaj tego pola: <input name="bot-field" type="text" tabindex="-1" autocomplete="off" /></label>
+            </p>
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="pole-firma">Imię lub nazwa firmy <span aria-hidden="true">*</span></label>
+                <input
+                  id="pole-firma"
+                  name="firma"
+                  type="text"
+                  autocomplete="organization"
+                  minlength="2"
+                  maxlength="120"
+                  required
+                />
+              </div>
+              <div class="form-field">
+                <label for="pole-email">Twój e-mail <span aria-hidden="true">*</span></label>
+                <input
+                  id="pole-email"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  inputmode="email"
+                  maxlength="254"
+                  autocapitalize="none"
+                  spellcheck="false"
+                  required
+                />
+              </div>
+              <div class="form-field form-field--full">
+                <label for="pole-wiadomosc">Wiadomość <span aria-hidden="true">*</span></label>
+                <textarea
+                  id="pole-wiadomosc"
+                  name="wiadomosc"
+                  rows="5"
+                  minlength="20"
+                  maxlength="3000"
+                  placeholder="Opisz krótko, czego potrzebujesz (co najmniej 20 znaków)"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <p class="form-note" id="form-note">
+              Ten formularz działa naprawdę, ale nie należy do fikcyjnej firmy
+              BudDem — wiadomość trafi do autora projektu demonstracyjnego,
+              który odpowie na podany e-mail.
+            </p>
+            <p class="form-status" data-form-status role="status" aria-live="polite" hidden></p>
+            <button class="button button--primary" type="submit">Wyślij wiadomość</button>
+          </form>
         </div>
       </section>
     </main>

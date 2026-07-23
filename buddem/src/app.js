@@ -323,6 +323,59 @@ export function initTheme() {
   });
 }
 
+export function initContactForm() {
+  const form = document.querySelector("[data-contact-form]");
+  if (!form || typeof window.fetch !== "function") return;
+
+  const status = form.querySelector("[data-form-status]");
+  const submitButton = form.querySelector('button[type="submit"]');
+
+  const showStatus = (text, isError) => {
+    if (!status) return;
+    status.hidden = false;
+    status.textContent = text;
+    status.classList.toggle("is-error", Boolean(isError));
+  };
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (submitButton) submitButton.disabled = true;
+    showStatus("Wysyłanie wiadomości…", false);
+
+    // Body budujemy z pól po nazwach, nie przez FormData(form) — działa tak samo
+    // w przeglądarce i w testach na happy-dom.
+    const body = new URLSearchParams();
+    for (const name of ["bot-field", "firma", "email", "wiadomosc"]) {
+      const field = form.elements.namedItem(name);
+      if (field) body.set(name, field.value);
+    }
+
+    try {
+      const response = await window.fetch(form.action, {
+        method: "POST",
+        body,
+        headers: { Accept: "text/html" },
+      });
+
+      if (response.ok) {
+        form.reset();
+        showStatus("Dziękuję! Wiadomość została wysłana — odpowiem na podany e-mail.", false);
+      } else if (response.status === 422) {
+        showStatus(
+          "Serwer odrzucił formularz — sprawdź, czy e-mail jest poprawny, a wiadomość ma od 20 do 3000 znaków.",
+          true,
+        );
+      } else {
+        showStatus("Nie udało się wysłać wiadomości. Spróbuj ponownie za chwilę.", true);
+      }
+    } catch {
+      showStatus("Brak połączenia z serwerem — spróbuj ponownie za chwilę.", true);
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
+  });
+}
+
 export function setCurrentYear() {
   document.querySelectorAll("[data-current-year]").forEach((element) => {
     element.textContent = String(new Date().getFullYear());
@@ -343,4 +396,5 @@ export function bootstrap() {
   initMobileCallBar();
   initScrollReveal();
   initStatCounters();
+  initContactForm();
 }
