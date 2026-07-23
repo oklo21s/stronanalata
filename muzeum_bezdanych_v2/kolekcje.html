@@ -14,10 +14,10 @@
     <script>
       document.documentElement.classList.add("js");
       // Motyw ustawiamy przed renderem, żeby nie było migotania. Zapamiętany wybór
-      // trzymamy w localStorage (to nie plik cookie), a bez wyboru słuchamy systemu.
+      // trzymamy w localStorage (to nie plik cookie), a bez wyboru zaczynamy od trybu jasnego.
       try {
         var storedTheme = localStorage.getItem("muzeum-v2-theme");
-        if (storedTheme === "dark" || (!storedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+        if (storedTheme === "dark") {
           document.documentElement.dataset.theme = "dark";
         }
       } catch (e) {}

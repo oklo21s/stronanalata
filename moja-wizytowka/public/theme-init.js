@@ -1,10 +1,7 @@
-// Ustawia tryb ciemny z preferencji systemu jeszcze przed renderem strony —
-// bez migotania i bez pamięci przeglądarki. Wczytywany jako zewnętrzny plik
-// z tej samej domeny, więc jest zgodny z CSP (script-src 'self').
+// Motyw domyślny to jasny — nie nadpisujemy go przed renderem. Skrypt zostaje
+// wczytany jako zewnętrzny plik z tej samej domeny (zgodny z CSP, script-src
+// 'self'), żeby ewentualna zmiana domyślnego motywu miała gdzie zamieszkać bez
+// migotania. Przełączanie w obrębie strony obsługuje initTheme() w app.js.
 (function () {
-  try {
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      document.documentElement.dataset.theme = "dark";
-    }
-  } catch (e) {}
+  // Celowo pusto: strona startuje w trybie jasnym.
 })();
