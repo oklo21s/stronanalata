@@ -151,7 +151,6 @@
             </div>
           </div>
         </div>
-        <p class="concept-label">Wizualizacja koncepcyjna</p>
       </section>
 
       <section class="utility-band" aria-label="Podstawowe informacje o projekcie">
@@ -196,14 +195,37 @@
             </a>
           </div>
           <figure class="intro__figure">
-            <img
-              src="%BASE_URL%assets/mapa-koncept.svg"
-              alt="Schemat poglądowy obszaru działania: jasny wielobok z zaznaczonymi punktami budów i pierścieniami zasięgu"
-              width="1200"
-              height="900"
-              loading="lazy"
-            />
-            <figcaption>Schemat poglądowy — rozmieszczenie budów jest przykładowe</figcaption>
+            <svg viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="Grafika obszaru działania: centralny wielobok z punktami budów i pierścieniami zasięgu">
+              <rect width="1200" height="900" fill="#ffffff"/>
+              <g fill="#f2f4f6" stroke="#dfe4e9" stroke-width="2">
+                <path d="M150 250 L330 210 L360 400 L300 520 L150 500 Z"/>
+                <path d="M330 640 L560 610 L640 720 L520 800 L330 780 Z"/>
+                <path d="M840 640 L1030 620 L1060 760 L880 790 Z"/>
+                <path d="M880 200 L1060 230 L1040 380 L860 360 Z"/>
+              </g>
+              <path
+                d="M370 230 L560 190 L740 200 L860 260 L880 400 L840 560 L700 640 L520 620 L400 520 L360 380 Z"
+                fill="#ffd84d" stroke="#e0ab00" stroke-width="3"/>
+              <g stroke="#e0ab00" stroke-width="1.5" fill="none" opacity="0.75">
+                <path d="M560 190 L580 420 L520 620"/>
+                <path d="M360 380 L580 420 L880 400"/>
+                <path d="M700 640 L580 420"/>
+              </g>
+              <g fill="#12181d">
+                <circle cx="580" cy="420" r="14"/>
+                <circle cx="470" cy="330" r="9"/>
+                <circle cx="700" cy="300" r="9"/>
+                <circle cx="640" cy="530" r="9"/>
+                <circle cx="790" cy="430" r="9"/>
+              </g>
+              <g stroke="#12181d" stroke-width="2" fill="none" opacity="0.5">
+                <path d="M580 420 L470 330 M580 420 L700 300 M580 420 L640 530 M580 420 L790 430"/>
+              </g>
+              <g stroke="#12181d" stroke-width="1.5" fill="none" opacity="0.25">
+                <circle cx="580" cy="420" r="120"/>
+                <circle cx="580" cy="420" r="210"/>
+              </g>
+            </svg>
           </figure>
         </div>
       </section>
@@ -349,7 +371,6 @@
             </a>
           </div>
         </div>
-        <p class="concept-label concept-label--career">Wizualizacja koncepcyjna</p>
       </section>
 
       <section class="stats stats--second" aria-labelledby="scale-title" data-reveal>
@@ -415,14 +436,51 @@
       <section class="process section-pad" id="jak-pracujemy" aria-labelledby="process-title" data-reveal>
         <div class="page-shell process__grid">
           <figure class="editorial-image">
-            <img
-              src="%BASE_URL%assets/realizacje-koncept.svg"
-              alt="Rysunek koncepcyjny mostu podwieszanego z dwoma pylonami i żółtymi wantami"
-              width="1536"
-              height="1024"
-              loading="lazy"
-            />
-            <figcaption>Wizualizacja koncepcyjna — nie przedstawia wykonanego obiektu</figcaption>
+            <svg
+              viewBox="0 0 1536 1024"
+              role="img"
+              aria-label="Rysunek koncepcyjny mostu podwieszanego z dwoma pylonami i żółtymi wantami"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient id="tloMost" x1="0" y1="0" x2="0.3" y2="1">
+                  <stop offset="0" stop-color="#eef1f4" />
+                  <stop offset="1" stop-color="#dde3e9" />
+                </linearGradient>
+              </defs>
+              <rect width="1536" height="1024" fill="url(#tloMost)" />
+              <!-- linia horyzontu -->
+              <path d="M0 720 H1536" stroke="#c3ccd4" stroke-width="2" fill="none" />
+              <!-- pylony mostu podwieszanego -->
+              <g stroke="#43535f" stroke-width="10" fill="none" stroke-linecap="square">
+                <path d="M420 720 V220" />
+                <path d="M1100 720 V220" />
+              </g>
+              <!-- wanty -->
+              <g stroke="#f2b705" stroke-width="3.5" fill="none">
+                <path d="M420 240 L200 560 M420 240 L280 560 M420 240 L350 560" />
+                <path d="M420 240 L500 560 M420 240 L620 560 M420 240 L740 560" />
+                <path d="M1100 240 L800 560 M1100 240 L920 560 M1100 240 L1030 560" />
+                <path d="M1100 240 L1180 560 M1100 240 L1300 560 M1100 240 L1420 560" />
+              </g>
+              <!-- pomost -->
+              <rect x="80" y="560" width="1380" height="34" fill="#43535f" />
+              <rect x="80" y="594" width="1380" height="10" fill="#2f3c46" />
+              <!-- podpory -->
+              <g fill="#43535f">
+                <rect x="396" y="594" width="48" height="126" />
+                <rect x="1076" y="594" width="48" height="126" />
+              </g>
+              <!-- pas jezdni -->
+              <g stroke="#ffffff" stroke-width="4" fill="none" opacity="0.85">
+                <path d="M120 577 H240 M300 577 H420 M480 577 H600 M660 577 H780 M840 577 H960 M1020 577 H1140 M1200 577 H1320 M1380 577 H1440" />
+              </g>
+              <!-- odbicie w wodzie -->
+              <g opacity="0.18">
+                <rect x="80" y="740" width="1380" height="12" fill="#43535f" />
+                <path d="M420 760 V900 M1100 760 V900" stroke="#43535f" stroke-width="8" fill="none" />
+              </g>
+            </svg>
           </figure>
           <div class="process__copy">
             <p class="eyebrow">Przebieg kontraktu</p>
@@ -701,5 +759,32 @@
     </div>
 
     <script type="module" src="/src/main.js"></script>
-  </body>
+      <script>
+      /* Awaryjne domkniecie sciezek assetow.
+         Gdy strone otwiera sie jako surowy plik (file://), Vite nie podmienia
+         %BASE_URL%, wiec assety sie nie laduja. Wtedy kierujemy je do public/.
+         W wersji budowanej/serwowanej %BASE_URL% jest juz podmienione - brak
+         dopasowan, wiec skrypt nic nie robi. */
+      (function () {
+        function fix() {
+          var els = document.querySelectorAll(
+            '[src*="%BASE_URL%"],[href*="%BASE_URL%"],[content*="%BASE_URL%"]'
+          );
+          for (var i = 0; i < els.length; i++) {
+            ["src", "href", "content"].forEach(function (a) {
+              var v = els[i].getAttribute(a);
+              if (v && v.indexOf("%BASE_URL%") !== -1) {
+                els[i].setAttribute(a, v.replace(/%BASE_URL%/g, "public/"));
+              }
+            });
+          }
+        }
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", fix);
+        } else {
+          fix();
+        }
+      })();
+    </script>
+</body>
 </html>

@@ -23,7 +23,12 @@
   --paper-soft: #1a2127;
   --paper-line: #2b343d;
   --muted: #9aa8b3;
-  --muted-light: #74838e;
+  /* --muted-light występuje wyłącznie na sekcjach ZAWSZE ciemnych (kontakt,
+     formularz, stopka), które w trybie ciemnym nie odwracają tła. Gdyby token
+     pociemniał jak reszta, ten drugorzędny tekst (adres, etykiety pól, notki,
+     copyright, „marka fikcyjna") zlewałby się z ciemnym tłem — dlatego trzyma
+     jasną barwę w obu motywach. */
+  --muted-light: #a9b7c2;
 }
 
 /* Pasek „projekt demonstracyjny" jest zawsze ciemny z żółtym tekstem — w trybie
@@ -610,7 +615,9 @@ svg.lucide {
   margin: 0;
 }
 
-.intro__figure img {
+.intro__figure img,
+.intro__figure svg {
+  display: block;
   width: 100%;
   height: auto;
   border: 1px solid var(--paper-line);
@@ -842,7 +849,9 @@ svg.lucide {
   margin: 0;
 }
 
-.editorial-image img {
+.editorial-image img,
+.editorial-image svg {
+  display: block;
   width: 100%;
   height: auto;
   border-radius: var(--radius);
