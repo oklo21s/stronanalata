@@ -70,9 +70,14 @@
   background: #12181d;
 }
 
-/* Żółte tła (pasma liczb, pasek mobilny) wymagają ciemnego tekstu. */
+/* Żółte tła (pasma liczb, pasek mobilny, logo BD, przycisk podstawowy,
+   skip-link) wymagają ciemnego tekstu — token --ink robi się jasny w trybie
+   ciemnym i napis znikał na stałym żółtym tle. */
 :root[data-theme="dark"] .stats,
-:root[data-theme="dark"] .mobile-call-bar {
+:root[data-theme="dark"] .mobile-call-bar,
+:root[data-theme="dark"] .brand-mark,
+:root[data-theme="dark"] .skip-link,
+:root[data-theme="dark"] .button--primary {
   color: #12181d;
 }
 

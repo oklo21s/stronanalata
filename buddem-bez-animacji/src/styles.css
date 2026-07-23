@@ -23,7 +23,11 @@
   --paper-soft: #1a2127;
   --paper-line: #2b343d;
   --muted: #9aa8b3;
-  --muted-light: #74838e;
+  /* --muted-light występuje wyłącznie na sekcjach ZAWSZE ciemnych (kontakt,
+     stopka), które w trybie ciemnym nie odwracają tła. Gdyby token pociemniał
+     jak reszta, ten drugorzędny tekst zlewałby się z ciemnym tłem — dlatego
+     trzyma jasną barwę w obu motywach (tak samo jak w buddem). */
+  --muted-light: #a9b7c2;
 }
 
 /* Pasek „projekt demonstracyjny" jest zawsze ciemny z żółtym tekstem — w trybie
@@ -31,6 +35,63 @@
 :root[data-theme="dark"] .demo-notice {
   background: #0c1114;
   color: var(--yellow);
+}
+
+/* Sekcje-akcenty mają STAŁE tło (ciemne pod obrazkiem/blokiem albo żółte) i nie
+   uczestniczą w odwróceniu motywu. Bez tego token tekstu (--ink/--paper) odwracał
+   się względem stałego tła i tekst znikał: nagłówek hero i kariery, liczby na
+   żółtym paśmie, notka o galerii, kontakt, marka w stopce i pasek mobilny.
+   Przypinamy tu stałe barwy, żeby kontrast był poprawny w obu motywach. */
+:root[data-theme="dark"] .hero,
+:root[data-theme="dark"] .career,
+:root[data-theme="dark"] .gallery-note,
+:root[data-theme="dark"] .contact {
+  background: #12181d;
+  color: #eef2f5;
+}
+
+:root[data-theme="dark"] .utility-band {
+  background: #1b232a;
+  color: #eef2f5;
+}
+
+/* Jasne linki/marka na tych sekcjach nie mogą pociemnieć razem z --paper. */
+:root[data-theme="dark"] .text-link--light {
+  color: #eef2f5;
+}
+
+:root[data-theme="dark"] .brand--footer .brand-copy strong {
+  color: #ffffff;
+}
+
+/* Chip ikony w kartach obszarów trzyma ciemne tło, żeby żółta ikona miała kontrast. */
+:root[data-theme="dark"] .area-card__icon {
+  background: #12181d;
+}
+
+/* Żółte tła (pasma liczb, pasek mobilny, logo BD, przycisk podstawowy,
+   skip-link) wymagają ciemnego tekstu — token --ink robi się jasny w trybie
+   ciemnym i napis znikał na stałym żółtym tle. */
+:root[data-theme="dark"] .stats,
+:root[data-theme="dark"] .mobile-call-bar,
+:root[data-theme="dark"] .brand-mark,
+:root[data-theme="dark"] .skip-link,
+:root[data-theme="dark"] .button--primary {
+  color: #12181d;
+}
+
+/* Drugie pasmo jest ciemne w obu motywach — tekst musi zostać jasny, inaczej
+   reguła wyżej pomalowałaby go na ciemno na ciemnym tle. */
+:root[data-theme="dark"] .stats--second {
+  color: #eef2f5;
+}
+
+:root[data-theme="dark"] .stats--second .stat-grid dt {
+  color: var(--yellow);
+}
+
+:root[data-theme="dark"] .stats--second .stat-grid dd {
+  color: #aeb9c2;
 }
 
 *,
