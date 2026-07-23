@@ -81,8 +81,8 @@ for (const page of pages) {
     if (!/\swidth="\d+"/.test(` ${attributes}`) || !/\sheight="\d+"/.test(` ${attributes}`)) {
       fail(`obraz bez stałych wymiarów: ${source ?? "nieznane źródło"}`);
     }
-    if (source?.startsWith("./")) {
-      const publicPath = resolve(projectRoot, "public", source.slice(2));
+    if (source?.startsWith("./") || source?.startsWith("%BASE_URL%")) {
+      const publicPath = resolve(projectRoot, "public", source.replace(/^(?:\.\/|%BASE_URL%)/, ""));
       if (!existsSync(publicPath)) fail(`brak pliku obrazu: ${source}`);
     }
   }

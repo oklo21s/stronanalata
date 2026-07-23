@@ -25,8 +25,8 @@ const rules = [
   },
   {
     label: "przełącznik wersji",
-    pattern: /<a class="status-bar__switch" href="\.\/bez-intro\.html">Zobacz wersję bez animacji wejścia<\/a>/,
-    replacement: '<a class="status-bar__switch" href="./index.html">Zobacz wersję z animacją wejścia</a>',
+    pattern: /<a class="status-bar__switch" href="%BASE_URL%bez-intro\.html">Zobacz wersję bez animacji wejścia<\/a>/,
+    replacement: '<a class="status-bar__switch" href="%BASE_URL%index.html">Zobacz wersję z animacją wejścia</a>',
   },
 ];
 

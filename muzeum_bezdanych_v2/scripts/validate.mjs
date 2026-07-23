@@ -40,7 +40,7 @@ const prohibitedPhrases = [
 // Istnienie lokalnego celu: pliki podstron leżą w katalogu głównym, a zasoby
 // (obrazy, favicon) w public/.
 function localExists(relPath) {
-  const clean = relPath.replace(/^\.\//, "");
+  const clean = relPath.replace(/^(?:\.\/|%BASE_URL%)/, "");
   return existsSync(resolve(projectRoot, clean)) || existsSync(resolve(projectRoot, "public", clean));
 }
 
@@ -72,7 +72,7 @@ for (const page of pages) {
   }
 
   // Lokalne linki do innych podstron i zasobów (href/src="./...") muszą istnieć.
-  for (const match of matches(/(?:href|src)="(\.\/[^":]+?)(#[^"]*)?"/g)) {
+  for (const match of matches(/(?:href|src)="((?:\.\/|%BASE_URL%)[^":]+?)(#[^"]*)?"/g)) {
     if (!localExists(match[1])) fail(`lokalny cel nie istnieje: ${match[1]}`);
   }
 
@@ -101,7 +101,7 @@ for (const page of pages) {
     if (!/\swidth="\d+"/.test(` ${attributes}`) || !/\sheight="\d+"/.test(` ${attributes}`)) {
       fail(`obraz bez stałych wymiarów: ${source ?? "nieznane źródło"}`);
     }
-    if (source?.startsWith("./") && !localExists(source)) {
+    if ((source?.startsWith("./") || source?.startsWith("%BASE_URL%")) && !localExists(source)) {
       fail(`brak pliku obrazu: ${source}`);
     }
   }

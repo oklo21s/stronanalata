@@ -200,7 +200,7 @@ test("the no-intro version carries the same content without the overlay", () => 
   assert.equal(document.querySelectorAll(".area-card").length, 6);
   assert.equal(document.querySelectorAll("[data-count-to]").length, 8);
   assert.equal(document.querySelectorAll("h1").length, 1);
-  assert.equal(document.querySelector(".status-bar__switch").getAttribute("href"), "./index.html");
+  assert.equal(document.querySelector(".status-bar__switch").getAttribute("href"), "%BASE_URL%index.html");
 });
 
 test("the no-intro version bootstraps and skips the intro cleanly", () => {

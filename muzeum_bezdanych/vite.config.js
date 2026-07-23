@@ -5,7 +5,7 @@ import { defineConfig } from "vite";
 // jeden pakiet JS i jeden arkusz CSS. Każda podstrona jest osobnym wejściem
 // Rollupa, więc build wygeneruje kompletny, samodzielny plik dla każdej z nich.
 export default defineConfig({
-  base: "./",
+  base: "/muzeum/",
   build: {
     cssMinify: true,
     sourcemap: false,

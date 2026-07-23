@@ -7,7 +7,7 @@ import { performance } from "node:perf_hooks";
 const root = resolve(import.meta.dirname, "..");
 const host = "127.0.0.1";
 const port = 4177;
-const baseUrl = `http://${host}:${port}/`;
+const baseUrl = `http://${host}:${port}/muzeum-plakat/`;
 const viteBin = resolve(root, "node_modules/vite/bin/vite.js");
 const errors = [];
 const timings = [];
