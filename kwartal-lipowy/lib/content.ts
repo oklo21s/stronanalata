@@ -14,6 +14,8 @@ import dziedziniec from '@/public/zdjecia/dziedziniec.jpg';
 import elewacja from '@/public/zdjecia/elewacja.jpg';
 import wnetrze from '@/public/zdjecia/wnetrze.jpg';
 import taras from '@/public/zdjecia/taras.jpg';
+import panorama from '@/public/zdjecia/panorama.jpg';
+import panoramaMala from '@/public/zdjecia/panorama-mala.jpg';
 
 export const firma = {
   nazwa: 'Kwartał Lipowy',
@@ -35,9 +37,16 @@ export const hero = {
   foto: fotoHero,
 
   // Panorama sferyczna 2:1. Dwa warianty wagowe — patrz README.
+  //
+  // Sciezki musza isc przez statyczny import, a nie napis '/zdjecia/...'.
+  // Teksture pobiera `useTexture` z three, ktore strzela po URL samo i nie wie
+  // nic o `basePath` z next.config — pod adresem stronanalata.pl/kwartal-lipowy
+  // napis dawal 404, useTexture rzucalo wyjatek i cala strona konczyla sie
+  // komunikatem "Application error". Statyczny import zwraca URL juz z
+  // prefiksem i zostaje poprawny takze po przenosinach na wlasna domene.
   panorama: {
-    plik: '/zdjecia/panorama.jpg',
-    plikMaly: '/zdjecia/panorama-mala.jpg',
+    plik: panorama.src,
+    plikMaly: panoramaMala.src,
     podpowiedz: 'Przeciągnij, aby się rozejrzeć',
     wlacz: 'Rozejrzyj się',
     wylacz: 'Zakończ rozglądanie',
