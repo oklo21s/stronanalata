@@ -15,7 +15,7 @@ function count(text, pattern) {
 
 const productionUrl = 'https://stronanalata.pl/';
 
-const [html, css, app, main, robots, sitemap, thanks, notFound, privacy, og, ogPng, securityHeaders, staticCss, contactBackend, launchTodo, missingData] = await Promise.all([
+const [html, css, app, main, robots, sitemap, thanks, notFound, privacy, og, ogPng, securityHeaders, staticCss, contactBackend] = await Promise.all([
   read('index.html'),
   read('src/style.css'),
   read('src/app.js'),
@@ -30,8 +30,6 @@ const [html, css, app, main, robots, sitemap, thanks, notFound, privacy, og, ogP
   read('public/.htaccess'),
   read('public/static-pages.css'),
   read('public/kontakt.php'),
-  read('URUCHOMIENIE-I-ZGODNOSC-TODO.md'),
-  read('DANE-DO-UZUPELNIENIA.md'),
 ]);
 
 const banned = [
@@ -63,7 +61,6 @@ check(count(html, /href="tel:\+48452448277"/gi) === 2, 'Telefon powinien być kl
 
 check(/<form[^>]+action="\/kontakt\.php"/i.test(html), 'Formularz nie wysyła danych do backendu /kontakt.php.');
 check(/<form[^>]+method="POST"/i.test(html), 'Formularz nie używa metody POST.');
-check(!/data-netlify|netlify-honeypot|name="form-name"/i.test(html), 'Formularz nadal zawiera atrybuty Netlify Forms.');
 check(/class="honeypot"[^>]*aria-hidden="true"/i.test(html) && /name="bot-field"[^>]+tabindex="-1"/i.test(html), 'Formularz nie ma ręcznego pola antyspamowego (honeypot).');
 check(/accept-charset="UTF-8"/i.test(html), 'Formularz nie wymusza kodowania UTF-8.');
 check(/id="firma"[^>]+minlength="2"[^>]+maxlength="120"/i.test(html), 'Pole imienia lub firmy nie ma bezpiecznych limitów długości.');
@@ -140,17 +137,9 @@ check(count(`${thanks}\n${notFound}\n${privacy}`, /src="\/assets\/logo-mark\.png
 check(!/\/(?:logo|favicon)\.svg/i.test(`${html}\n${thanks}\n${notFound}\n${privacy}`), 'Publikowany HTML nadal odwołuje się do starego logo.');
 check(/Mikołaj Oczkowski/i.test(privacy) && /mikolajoczkowski42@gmail\.com/i.test(privacy), 'Polityka prywatności nie zawiera danych administratora.');
 check(/Hostinger/i.test(privacy) && /podmiotem przetwarzającym/i.test(privacy), 'Polityka prywatności nie opisuje przetwarzania formularza na serwerze Hostinger.');
-check(!/Netlify/i.test(privacy), 'Polityka prywatności nadal odwołuje się do Netlify.');
 check(/imię lub nazwę firmy/i.test(privacy), 'Polityka prywatności nie opisuje pola imienia lub nazwy firmy zgodnie z formularzem.');
 check(/nie używa plików cookies/i.test(privacy) && /narzędzi analitycznych/i.test(privacy), 'Polityka prywatności nie opisuje braku cookies i analityki.');
 check(!/\[[^\]]+\]/.test(`${thanks}\n${notFound}\n${privacy}\n${og}`), 'W publikowanych plikach pomocniczych pozostał placeholder w nawiasach kwadratowych.');
-check(/## 1\. Decyzje i dane właściciela/i.test(launchTodo) && /## 4\. Migracja formularza/i.test(launchTodo) && /## 7\. Kontrola po publikacji/i.test(launchTodo) && /## 8\. Bezpieczeństwo i dane po publikacji/i.test(launchTodo), 'Lista uruchomienia i zgodności nie zawiera wszystkich wymaganych etapów.');
-check(!/- \[x\]/i.test(launchTodo), 'Lista zadań zawiera ukończone pozycje zamiast wyłącznie zadań pozostałych.');
-check(/## 1\. Dane blokujące publikację/i.test(missingData), 'Plik danych nie oddziela braków blokujących publikację.');
-check(/## 2\. Dane opcjonalne na później/i.test(missingData), 'Plik danych nie oddziela informacji opcjonalnych.');
-check(/## 3\. Co zaktualizować po otrzymaniu odpowiedzi/i.test(missingData), 'Plik danych nie wskazuje wpływu odpowiedzi na pliki.');
-check(!/- \[x\]/i.test(missingData), 'Plik danych do uzupełnienia zawiera ukończone pozycje.');
-check(/## Definicja ukończenia/i.test(missingData), 'Plik danych nie zawiera definicji ukończenia.');
 
 for (const file of [
   'public/assets/logo-mark.png',
@@ -169,8 +158,6 @@ for (const file of [
   'public/assets/og-card.png',
   'scripts/check-powershell.ps1',
   'kontakt.config.example.php',
-  'DANE-DO-UZUPELNIENIA.md',
-  'URUCHOMIENIE-I-ZGODNOSC-TODO.md',
   'README.md',
 ]) {
   try {

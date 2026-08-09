@@ -1,0 +1,355 @@
+@import 'tailwindcss';
+
+@source '../app';
+@source '../components';
+@source '../data';
+
+/* ---------------------------------------------------------------------------
+   TOKENY
+   Tailwind 4 w wariancie CSS-first: brak tailwind.config.js, wszystko tutaj.
+   Kazdy token z @theme generuje odpowiadajaca mu klase (bg-cream, text-wine, ...).
+--------------------------------------------------------------------------- */
+@theme {
+  --color-cream: #f4eee1; /* tlo bazowe — ciepły papier */
+  --color-paper: #fbf7ef; /* karty i sekcje jasniejsze o ton */
+  --color-ink: #221a16; /* tekst glowny */
+  --color-ink-soft: #6b5a4f; /* tekst pomocniczy — tylko >= 16px */
+  --color-wine: #5c1524; /* akcent glowny, kolor marki */
+  --color-wine-deep: #380d16; /* tlo sekcji ciemnych */
+  --color-gold: #9b7333; /* akcent drugorzedny, uzywany oszczednie */
+  --color-line: #ddd0b7; /* hairline na jasnym tle */
+  --color-line-dark: #6a4450; /* hairline na tle wine */
+
+  --font-display: var(--font-cormorant), 'Cormorant Garamond', ui-serif, Georgia, serif;
+  --font-body: var(--font-jost), 'Jost', ui-sans-serif, system-ui, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Siatka: 1320px, rynna 20px / 36px. */
+  --container-page: 1320px;
+  --gutter: 20px;
+
+  /* Projekt jest miekki, ale nie zaokraglony „na aplikacje" — maksimum 2px. */
+  --radius-xs: 0px;
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+  --radius-2xl: 2px;
+  --radius-3xl: 2px;
+  --radius-4xl: 2px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --gutter: 36px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   BASE
+--------------------------------------------------------------------------- */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    /* Zadnego scroll-behavior: smooth — plynnosc daje wylacznie Lenis. */
+  }
+
+  html {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    /* Kotwice z nawigacji lądują pod paskiem nawigacji, nie za nim. */
+    scroll-padding-top: 96px;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.6;
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+    font-weight: 400;
+  }
+
+  p {
+    margin: 0;
+    text-wrap: pretty;
+  }
+
+  img,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+
+  input,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background-color: var(--color-wine);
+    color: var(--color-cream);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   UKLAD I TYPOGRAFIA
+--------------------------------------------------------------------------- */
+@layer components {
+  .shell {
+    width: 100%;
+    max-width: var(--container-page);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .shell-narrow {
+    width: 100%;
+    max-width: 860px;
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  .grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--gutter);
+  }
+
+  .type-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    line-height: 0.95;
+    letter-spacing: -0.015em;
+  }
+
+  .type-h1 {
+    font-size: clamp(3.25rem, 10vw, 9rem);
+  }
+
+  .type-h2 {
+    font-size: clamp(2.25rem, 5.4vw, 4.5rem);
+  }
+
+  .type-h3 {
+    font-size: clamp(1.6rem, 3vw, 2.5rem);
+  }
+
+  .type-h4 {
+    font-size: clamp(1.25rem, 2vw, 1.6rem);
+  }
+
+  /* Nadpis sekcji — maly, rozstrzelony, wersaliki. */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+
+  .rule {
+    height: 1px;
+    background-color: var(--color-line);
+  }
+
+  .rule-dark {
+    height: 1px;
+    background-color: var(--color-line-dark);
+  }
+
+  /* Klasyczny wiersz karty dan: nazwa — kropki — cena.
+     Kropki rysuje tlo w srodkowym elemencie, wiec skaluja sie z szerokoscia. */
+  .leader {
+    flex: 1 1 auto;
+    min-width: 1.5rem;
+    align-self: end;
+    margin-bottom: 0.35em;
+    border-bottom: 1px dotted currentColor;
+    opacity: 0.35;
+  }
+
+  /* Podkreslenie rosnace od lewej — uzywane w nawigacji i stopce. */
+  .link-underline {
+    position: relative;
+  }
+
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -0.2em;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.45s var(--ease-out-expo);
+  }
+
+  .link-underline:hover::after,
+  .link-underline:focus-visible::after {
+    transform: scaleX(1);
+  }
+
+  /* Przyciski. Dwa warianty wystarczaja na cala strone. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.95rem 1.9rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    transition:
+      background-color 0.35s var(--ease-out-expo),
+      color 0.35s var(--ease-out-expo),
+      border-color 0.35s var(--ease-out-expo);
+  }
+
+  .btn-solid {
+    background-color: var(--color-wine);
+    color: var(--color-cream);
+    border-color: var(--color-wine);
+  }
+
+  .btn-solid:hover {
+    background-color: var(--color-wine-deep);
+    border-color: var(--color-wine-deep);
+  }
+
+  .btn-ghost {
+    border-color: currentColor;
+  }
+
+  .btn-ghost:hover {
+    background-color: var(--color-ink);
+    color: var(--color-cream);
+    border-color: var(--color-ink);
+  }
+
+  .btn-ghost-light {
+    border-color: currentColor;
+  }
+
+  .btn-ghost-light:hover {
+    background-color: var(--color-cream);
+    color: var(--color-wine-deep);
+    border-color: var(--color-cream);
+  }
+
+  /* Pole formularza: linia zamiast ramki, zeby karta rezerwacji
+     wygladala jak druk, a nie jak panel administracyjny. */
+  .field {
+    width: 100%;
+    padding: 0.7rem 0 0.55rem;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--color-line-dark);
+    color: inherit;
+    transition: border-color 0.3s var(--ease-out-expo);
+  }
+
+  .field::placeholder {
+    color: currentColor;
+    opacity: 0.45;
+  }
+
+  .field:hover,
+  .field:focus {
+    border-color: currentColor;
+  }
+
+  .field:focus {
+    outline: none;
+  }
+
+  /* Natywna strzalka <select> jest w kazdej przegladarce inna — zdejmujemy ja
+     i rysujemy wlasna w komponencie. */
+  select.field {
+    appearance: none;
+    border-radius: 0;
+  }
+
+  .field-label {
+    display: block;
+    font-size: 0.6875rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   SPLITTEXT
+   Maski linii dostaje SplitText (opcja mask: 'lines'); tutaj tylko higiena,
+   zeby diakrytyki (Ą, Ż, ó) nie byly przycinane przez overflow maski.
+--------------------------------------------------------------------------- */
+.split-line {
+  padding-block: 0.08em;
+}
+
+.split-word,
+.split-char {
+  display: inline-block;
+}
+
+/* ---------------------------------------------------------------------------
+   REDUCED MOTION
+   Warstwa CSS jest siatka bezpieczenstwa; wlasciwe wylaczenie animacji
+   (Lenis, GSAP, preloader) dzieje sie w JS na podstawie tej samej ankiety.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

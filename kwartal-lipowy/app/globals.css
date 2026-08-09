@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-kosc text-grafit font-sans antialiased;
+    /* Parallax i pinning licza pozycje w poziomie — poziomy przewijak
+       potrafi pojawic sie na ulamek sekundy przy refreshu ScrollTriggera. */
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-lipa text-kosc;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-lipa ring-offset-2 ring-offset-kosc;
+  }
+
+  /* Bez tego kotwice skakalyby natywnie, walczac z animacja Lenisa. */
+  html:not(.lenis) {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  /* Klasy Lenisa — komplet zalecany przez biblioteke.
+     Bez `scroll-behavior: auto` natywne wygladzanie bije sie z inercyjnym. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-smooth iframe {
+    pointer-events: none;
+  }
+}
+
+@layer utilities {
+  .kontener {
+    @apply mx-auto w-full max-w-tresc px-6 md:px-10;
+  }
+
+  .nadtytul {
+    @apply text-xs font-medium uppercase tracking-[0.22em] text-kamien;
+  }
+
+  /* Poziomy pasek opinii i zakladek harmonogramu: bez widocznego przewijaka. */
+  .pas-poziomy {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .pas-poziomy::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Ostatnia linia obrony. GSAP i Framer dostaja wlasne sciezki dla
+   prefers-reduced-motion, ale to lapie takze przejscia zapisane w CSS
+   i wszystko, co przeoczylismy. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

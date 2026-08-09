@@ -1,0 +1,112 @@
+@import 'tailwindcss';
+
+/*
+  Jeden zamknięty motyw dla całej strony. Strona opowiada przejście
+  ze złotej godziny w noc, więc kolory są treścią, nie preferencją
+  systemu - nie ma tu wariantu jasnego i ciemnego do przełączania.
+  Akt ciepły używa akcentu `zloto`, akt nocny akcentu `lod`.
+*/
+@theme {
+  --font-display: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter Tight Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-kremowa: #f7f1e6;
+  --color-piasek: #e3d4bd;
+  --color-zloto: #e9a13b;
+  --color-zar: #d8623c;
+
+  --color-noc: #060b1a;
+  --color-granat: #0a1128;
+  --color-granat-2: #0f1c3f;
+  /*
+    Tekst pomocniczy musi utrzymać 4.5:1 nie tylko na granacie, ale też nad
+    najjaśniejszym, co może przejść pod zasłoną sekcji: rozświetloną cząstką
+    albo śniegiem na szczycie. Stąd jaśniejszy odcień stali niż zwykle.
+  */
+  --color-stal: #c2d0e8;
+  --color-lod: #6fd8f2;
+
+  /* Kolor semantyczny, nie akcent marki: używany wyłącznie do błędów formularza. */
+  --color-alarm: #ff9d8f;
+}
+
+/*
+  Skala promieni: zero. Cała strona jest ostra - przyciski, panele,
+  zdjęcia i pola formularza. To jedyny obowiązujący system kształtu.
+*/
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--color-granat);
+    color-scheme: dark;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--color-kremowa);
+    -webkit-font-smoothing: antialiased;
+    /* `clip`, nie `hidden`: `hidden` robi z body kontener przewijania
+       i psuje `position: sticky` w strefie narracji. */
+    overflow-x: clip;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-lod);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: var(--color-lod);
+    color: var(--color-granat);
+  }
+}
+
+@layer components {
+  .tytul-wyswietlany {
+    font-family: var(--font-display);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+  }
+}
+
+@layer utilities {
+  @keyframes tetno {
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translateY(7px);
+      opacity: 1;
+    }
+  }
+
+  .tetno {
+    animation: tetno 2.6s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tetno {
+      animation: none;
+      opacity: 0.85;
+    }
+  }
+
+  /* Ziarno leży na stałej, nieprzewijanej warstwie - patrz README, sekcja wydajność. */
+  .ziarno::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
