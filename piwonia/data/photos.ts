@@ -2,7 +2,9 @@
  * Rejestr zdjec. Wymiary, blurDataURL i podpis autora sa generowane razem
  * z plikami w public/img — patrz README, sekcja "Zdjecia".
  *
- * PLIK GENEROWANY. Recznie edytuje sie tylko opisy alt (w skrypcie generujacym).
+ * PLIK GENEROWANY. Recznie edytuje sie tylko opisy alt (w skrypcie generujacym)
+ * oraz blok z BASE_PATH na koncu pliku — po regeneracji trzeba go przywrocic,
+ * inaczej zdjecia znikna z dema stojacego pod podscieżką.
  */
 
 export type Photo = {
@@ -14,7 +16,7 @@ export type Photo = {
   readonly credit: { readonly author: string; readonly href: string }
 }
 
-export const photos = {
+const zdjeciaBezPrefiksu = {
   'bar': {
     src: '/img/bar.jpg',
     width: 1600,
@@ -196,5 +198,21 @@ export const photos = {
     credit: { author: "Fabrizio Magoni", href: "https://unsplash.com/photos/person-preparing-cooked-dish-boaDpmC-_Xo" },
   },
 } as const satisfies Record<string, Photo>
+
+/**
+ * Next dokleja `basePath` do stron i do /_next/, ale NIE do plikow z public/ —
+ * to trzeba zrobic recznie. Bez prefiksu optymalizator next/image dostaje
+ * `/img/cos.jpg`, szuka tego w korzeniu domeny (gdzie stoi wizytowka, nie demo)
+ * i zwraca 400 "The requested resource isn't a valid image".
+ * Wartosc musi byc taka sama jak `basePath` w next.config.ts.
+ */
+const BASE_PATH = '/piwonia'
+
+export const photos = Object.fromEntries(
+  Object.entries(zdjeciaBezPrefiksu).map(([klucz, zdjecie]) => [
+    klucz,
+    { ...zdjecie, src: `${BASE_PATH}${zdjecie.src}` },
+  ]),
+) as { readonly [K in keyof typeof zdjeciaBezPrefiksu]: Photo }
 
 export type PhotoKey = keyof typeof photos

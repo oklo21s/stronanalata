@@ -3,6 +3,13 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Demo stoi pod stronanalata.pl/piwonia — Next musi doklejac ten prefiks do
+  // adresow stron i zasobow z /_next/. Przy przenosinach na wlasna
+  // domene/subdomene wystarczy usunac te linie.
+  basePath: '/piwonia',
+  // Buduje samowystarczalny serwer w .next/standalone (tylko realnie uzywane
+  // moduly) — to jego kopiuje finalny obraz Dockera zamiast calego node_modules.
+  output: 'standalone',
   images: {
     // AVIF pierwszy, WebP jako fallback dla Safari < 16.
     formats: ['image/avif', 'image/webp'],
