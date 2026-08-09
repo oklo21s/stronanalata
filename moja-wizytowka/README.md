@@ -8,6 +8,27 @@ Strona jest przygotowana pod hosting Hostinger (Apache + PHP): statyczny build
 Vite, backend formularza w `public/kontakt.php` i nagłówki bezpieczeństwa w
 `public/.htaccess`.
 
+## Struktura adresów
+
+Strona jest **wielostronicowa** — trzy osobne pliki HTML, każdy z własnym
+`canonical`, opisem i wpisem w sitemapie:
+
+| Adres          | Plik źródłowy           | Rola                                                    |
+| -------------- | ----------------------- | ------------------------------------------------------- |
+| `/`            | `index.html`            | strona główna: skrót oferty, cztery realizacje, formularz |
+| `/oferta/`     | `oferta/index.html`     | pełny zakres trzech pakietów, terminy, koszty stałe, FAQ |
+| `/realizacje/` | `realizacje/index.html` | wszystkie czternaście projektów pokazowych, pogrupowane     |
+
+Poza tym `/o-mnie`, `/uslugi`, `/proces`, `/faq` i `/kontakt` to **sekcje strony
+głównej** — `.htaccess` serwuje na nich `index.html`, a `initRouting()`
+w `src/app.js` przewija do właściwego miejsca. Router celowo nie zna adresów
+`/oferta/` i `/realizacje/`, żeby przeglądarka otwierała je normalnie; pilnują
+tego testy w `tests/app.test.mjs`.
+
+Dodanie kolejnej podstrony wymaga trzech kroków: nowe wejście w
+`vite.config.js`, nowy `<url>` w `public/sitemap.xml` i dopisanie strony do
+tablicy `pages` w `scripts/validate.mjs`.
+
 ## Uruchomienie
 
 ```powershell
@@ -66,8 +87,9 @@ z instrukcją wdrożenia znajduje się w `kontakt.config.example.php`. Prawdziwy
 
 ## Ważne przed publikacją
 
-- Canonical, Open Graph, `robots.txt` i `sitemap.xml` wskazują `https://stronanalata.pl/`. Po zmianie domeny trzeba zmienić wszystkie adresy SEO.
-- Indeksowanie strony głównej jest włączone. Polityka prywatności, strona podziękowania i 404 pozostają poza indeksem.
+- **Dema podlinkowane z `/realizacje/` muszą być wdrożone**, inaczej galeria prowadzi w 404. Lista wymaganych adresów i stan przygotowania: `WDROZENIE-DEM.md`.
+- Canonical, Open Graph, `robots.txt` i `sitemap.xml` wskazują `https://stronanalata.pl/`. Po zmianie domeny trzeba zmienić wszystkie adresy SEO — w **trzech** plikach HTML, nie w jednym.
+- Indeksowanie wszystkich trzech stron jest włączone. Polityka prywatności, strona podziękowania i 404 pozostają poza indeksem.
 - Uzupełnij potwierdzone dane usługodawcy i ustal, czy formularz wymaga regulaminu świadczenia usług drogą elektroniczną.
 - Roboczy projekt regulaminu znajduje się w `REGULAMIN-FORMULARZA-ROBOCZY.md`; nie
   jest podlinkowany na stronie i wymaga uzupełnienia pełnych danych oraz weryfikacji
@@ -75,7 +97,14 @@ z instrukcją wdrożenia znajduje się w `kontakt.config.example.php`. Prawdziwy
 - Sprawdź, czy opis odbiorców danych w polityce prywatności odpowiada faktycznie używanym usługom Hostinger i Google.
 - Załóż skrzynkę SMTP w hPanelu, wgraj `kontakt.config.php` i PHPMailer nad `public_html`, ustaw SPF/DKIM/DMARC, a następnie wykonaj produkcyjne wysłanie formularza i potwierdź wiadomość e-mail.
 
-Pełna lista etapów przed i po publikacji znajduje się w `URUCHOMIENIE-I-ZGODNOSC-TODO.md`. Brakujące, niepotwierdzone dane są zebrane w `DANE-DO-UZUPELNIENIA.md`.
+## Zasada dotycząca liczb i cen
+
+Na stronie znajduje się dokładnie jedna cena — „od 600 zł” przy pakiecie
+wizytówkowym. Pozostałe zakresy mówią „wycena po analizie”, bo właściciel nie
+zatwierdził żadnych widełek. `scripts/validate.mjs` **odrzuci build**, w którym
+na stronie oferty pojawi się zakres cenowy w formacie `x–y zł`. To celowa
+blokada: gdy zdecydujesz się podać widełki, najpierw usuń ten test, a potem
+wpisz liczby — nie odwrotnie.
 
 ## Cookies i analityka
 

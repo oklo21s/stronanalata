@@ -1,4 +1,4 @@
-# Konfiguracja Apache dla Hostingera — odpowiednik dawnego netlifyowego _headers.
+# Konfiguracja Apache dla Hostingera — nagłówki HTTP i reguły serwera.
 # Plik jest kopiowany przez Vite z public/ do dist/ i musi trafić do public_html.
 
 Options -Indexes
@@ -8,12 +8,16 @@ ErrorDocument 404 /404.html
 
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  # Czyste adresy sekcji strony jednostronicowej -> serwuj index.html.
+  # Czyste adresy sekcji strony głównej -> serwuj index.html.
   # Wejście wprost lub odświeżenie na /faq, /uslugi itd. nie daje 404;
   # JavaScript po załadowaniu przewija do właściwej sekcji.
+  #
+  # UWAGA: /oferta/ i /realizacje/ to prawdziwe katalogi z własnym index.html,
+  # więc świadomie nie ma ich na tej liście — warunek !-d i tak by je pominął,
+  # ale wypisanie ich tutaj byłoby myląco sugerowało, że to sekcje jednej strony.
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule ^(o-mnie|uslugi|proces|realizacje|faq|kontakt)/?$ /index.html [L]
+  RewriteRule ^(o-mnie|uslugi|proces|faq|kontakt)/?$ /index.html [L]
 </IfModule>
 
 <IfModule mod_headers.c>

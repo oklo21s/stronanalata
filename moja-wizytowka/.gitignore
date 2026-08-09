@@ -1,0 +1,8 @@
+node_modules/
+dist/
+*.log
+
+# Konfiguracja SMTP formularza — zawiera hasło skrzynki i nigdy nie trafia
+# do repo. Wzór bez sekretów leży w kontakt.config.example.php, a prawdziwy
+# plik wgrywa się na serwer poziom nad katalogiem publicznym.
+kontakt.config.php

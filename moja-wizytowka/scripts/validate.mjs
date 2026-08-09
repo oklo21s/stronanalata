@@ -15,8 +15,10 @@ function count(text, pattern) {
 
 const productionUrl = 'https://stronanalata.pl/';
 
-const [html, css, app, main, robots, sitemap, thanks, notFound, privacy, og, ogPng, securityHeaders, staticCss, contactBackend] = await Promise.all([
+const [html, offer, works, css, app, main, robots, sitemap, thanks, notFound, privacy, og, ogPng, securityHeaders, staticCss, contactBackend, viteConfig] = await Promise.all([
   read('index.html'),
+  read('oferta/index.html'),
+  read('realizacje/index.html'),
   read('src/style.css'),
   read('src/app.js'),
   read('src/main.js'),
@@ -30,7 +32,15 @@ const [html, css, app, main, robots, sitemap, thanks, notFound, privacy, og, ogP
   read('public/.htaccess'),
   read('public/static-pages.css'),
   read('public/kontakt.php'),
+  read('vite.config.js'),
 ]);
+
+// Strony indeksowane: każda musi samodzielnie spełniać wymagania SEO i CSP.
+const pages = [
+  { name: 'strona główna', file: 'index.html', source: html, url: productionUrl },
+  { name: 'oferta', file: 'oferta/index.html', source: offer, url: `${productionUrl}oferta/` },
+  { name: 'realizacje', file: 'realizacje/index.html', source: works, url: `${productionUrl}realizacje/` },
+];
 
 const banned = [
   'najwyższa jakość',
@@ -42,18 +52,35 @@ const banned = [
   'setki klientów',
 ];
 
-check(count(html, /<h1(?:\s|>)/gi) === 1, 'Strona musi mieć dokładnie jeden nagłówek h1.');
-check(/<html\s+lang="pl"/i.test(html), 'Brakuje języka dokumentu lang="pl".');
-check(/<main\s+id="main"/i.test(html), 'Brakuje semantycznego elementu main.');
-check(/<meta\s+name="description"/i.test(html), 'Brakuje meta description.');
-check(/<meta\s+name="robots"\s+content="index,follow"/i.test(html), 'Strona produkcyjna nie ma index,follow.');
-check(new RegExp(`<link\\s+rel="canonical"\\s+href="${productionUrl}"`, 'i').test(html), 'Canonical nie wskazuje adresu produkcyjnego.');
-check(new RegExp(`<meta\\s+property="og:url"\\s+content="${productionUrl}"`, 'i').test(html), 'og:url nie wskazuje adresu produkcyjnego.');
+// --- Wymagania wspólne dla każdej indeksowanej strony ---
+for (const page of pages) {
+  const where = `[${page.name}]`;
+  check(count(page.source, /<h1(?:\s|>)/gi) === 1, `${where} Strona musi mieć dokładnie jeden nagłówek h1.`);
+  check(/<html\s+lang="pl"/i.test(page.source), `${where} Brakuje języka dokumentu lang="pl".`);
+  check(/<main\s+id="main"/i.test(page.source), `${where} Brakuje semantycznego elementu main.`);
+  check(/<meta\s+name="description"\s+content="[^"]{60,}"/i.test(page.source), `${where} Brakuje meta description albo jest zbyt krótka.`);
+  check(/<meta\s+name="robots"\s+content="index,follow"/i.test(page.source), `${where} Strona produkcyjna nie ma index,follow.`);
+  check(new RegExp(`<link\\s+rel="canonical"\\s+href="${page.url}"`, 'i').test(page.source), `${where} Canonical nie wskazuje własnego adresu produkcyjnego.`);
+  check(new RegExp(`<meta\\s+property="og:url"\\s+content="${page.url}"`, 'i').test(page.source), `${where} og:url nie wskazuje własnego adresu produkcyjnego.`);
+  check(/class="skip-link"/i.test(page.source), `${where} Brakuje linku pomijającego nawigację.`);
+  check(/<script[^>]+src="\/theme-init\.js"/i.test(page.source), `${where} Brakuje skryptu ustawiającego motyw przed renderem.`);
+  check(count(page.source, /class="brand__mark"[^>]+src="\/assets\/logo-mark\.png"/gi) === 2, `${where} Nagłówek i stopka nie korzystają z aktualnego znaku marki.`);
+  check(!/<script[^>]+src="https?:\/\//i.test(page.source), `${where} Strona ładuje zewnętrzny skrypt.`);
+  check(!/<link[^>]+href="https?:\/\/[^"]+\.css/i.test(page.source), `${where} Strona ładuje zewnętrzny arkusz stylów.`);
+  check(!/<style(?:\s|>)/i.test(page.source), `${where} Styl inline jest blokowany przez CSP.`);
+  check(!/\[[^\]]+\]/.test(page.source), `${where} W publikowanym HTML pozostał placeholder w nawiasach kwadratowych.`);
+  check(new RegExp(`property="og:image"\\s+content="${productionUrl}assets/og-card\\.png"`, 'i').test(page.source), `${where} Open Graph nie wskazuje bezwzględnego adresu obrazu PNG.`);
+
+  const pageIds = new Set([...page.source.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]));
+  for (const [, target] of page.source.matchAll(/href="#([\w-]+)"/g)) {
+    check(pageIds.has(target), `${where} Odnośnik „#${target}” nie ma celu na stronie.`);
+  }
+}
+
+// --- Wymagania tylko dla strony głównej ---
 check(/<link\s+rel="icon"[^>]+href="\/assets\/logo-mark\.png"[^>]+type="image\/png"/i.test(html), 'Favicon nie korzysta z aktualnego znaku marki.');
-check(count(html, /class="brand__mark"[^>]+src="\/assets\/logo-mark\.png"/gi) === 2, 'Nagłówek i stopka nie korzystają z aktualnego znaku marki.');
 check(count(html, /src="\/assets\/logo-web-design\.png"/gi) === 1, 'Pełne logo WEB DESIGN nie zostało osadzone dokładnie raz.');
 check(!/nieoficjalny prototyp/i.test(html), 'Baner nieoficjalnego prototypu nie został usunięty.');
-check(!/\[[^\]]+\]/.test(html), 'W publikowanym HTML pozostał placeholder w nawiasach kwadratowych.');
 check(/Mikołaj Oczkowski/i.test(html), 'Brakuje potwierdzonego imienia i nazwiska.');
 check(/href="mailto:mikolajoczkowski42@gmail\.com"/i.test(html), 'Brakuje prawidłowego linku mailto:.');
 check(/href="tel:\+48452448277"/i.test(html), 'Brakuje klikalnego linku tel: do potwierdzonego numeru telefonu.');
@@ -85,7 +112,6 @@ check(/property="og:image:type"\s+content="image\/png"/i.test(html), 'Brakuje ty
 check(ogPng.subarray(1, 4).toString('ascii') === 'PNG', 'Obraz Open Graph nie jest prawidłowym plikiem PNG.');
 check(ogPng.readUInt32BE(16) === 1200 && ogPng.readUInt32BE(20) === 630, 'Obraz Open Graph musi mieć 1200 × 630 px.');
 
-check(/class="skip-link"/i.test(html), 'Brakuje linku pomijającego nawigację.');
 check(/prefers-reduced-motion:\s*reduce/i.test(css), 'Brakuje obsługi prefers-reduced-motion.');
 check(/--focus:\s*#d86100/i.test(css), 'Brakuje kontrastowego koloru fokusu dla jasnych i ciemnych teł.');
 check(/\.button--primary\s*\{[^}]*color:\s*var\(--ink\)/is.test(css), 'Główny przycisk nadal używa zbyt jasnego tekstu na pomarańczowym tle.');
@@ -95,10 +121,7 @@ check(/\.site-nav\s*\{/i.test(css) && /\.js\s+\.site-nav/i.test(css), 'Nawigacja
 check(/export function initNavigation/i.test(app), 'Logika nawigacji nie eksportuje initNavigation.');
 check(/export function initReveal/i.test(app), 'Logika animacji nie eksportuje initReveal.');
 check(/initNavigation\(document\)/i.test(main) && /initReveal\(document\)/i.test(main), 'Interakcje nie są inicjalizowane.');
-check(!/<script[^>]+src="https?:\/\//i.test(html), 'Strona ładuje zewnętrzny skrypt.');
-check(/<script[^>]+src="\/theme-init\.js"/i.test(html), 'Brakuje skryptu ustawiającego motyw przed renderem (zgodnego z CSP).');
-check(!/<link[^>]+href="https?:\/\/[^\"]+\.css/i.test(html), 'Strona ładuje zewnętrzny arkusz stylów.');
-check(!/document\.cookie|localStorage|sessionStorage|gtag\(|googletagmanager|facebook\.com\/tr|clarity\(|hotjar|matomo|mixpanel/i.test(`${html}\n${app}\n${main}`), 'Strona zawiera mechanizm cookies, pamięci przeglądarki lub tracker bez obsługi zgody.');
+check(!/document\.cookie|localStorage|sessionStorage|gtag\(|googletagmanager|facebook\.com\/tr|clarity\(|hotjar|matomo|mixpanel/i.test(`${html}\n${offer}\n${works}\n${app}\n${main}`), 'Strona zawiera mechanizm cookies, pamięci przeglądarki lub tracker bez obsługi zgody.');
 check(/Header always set Content-Security-Policy/i.test(securityHeaders), 'Brakuje nagłówka Content-Security-Policy w .htaccess.');
 check(/form-action 'self'/i.test(securityHeaders), 'CSP nie ogranicza miejsca wysyłki formularza.');
 check(/frame-ancestors 'none'/i.test(securityHeaders), 'CSP nie blokuje osadzania strony w ramkach.');
@@ -117,19 +140,42 @@ check(/dirname\(__DIR__\)\s*\.\s*'\/kontakt\.config\.php'/.test(contactBackend),
 check(/isSMTP\(\)/.test(contactBackend) && /PHPMailer/.test(contactBackend), 'Backend formularza nie wysyła przez PHPMailer i uwierzytelniony SMTP.');
 check(!/smtp_pass'\s*=>\s*'(?!TUTAJ)[^']+'/i.test(contactBackend), 'Backend formularza zawiera zapisane na stałe hasło SMTP.');
 
-for (const phrase of banned) {
-  check(!html.toLocaleLowerCase('pl').includes(phrase), `Niedozwolony ogólnik lub niepotwierdzona obietnica: „${phrase}”.`);
+for (const page of pages) {
+  for (const phrase of banned) {
+    check(!page.source.toLocaleLowerCase('pl').includes(phrase), `[${page.name}] Niedozwolony ogólnik lub niepotwierdzona obietnica: „${phrase}”.`);
+  }
 }
 
-const ids = new Set([...html.matchAll(/\sid="([^"]+)"/g)].map((match) => match[1]));
-for (const [, target] of html.matchAll(/href="#([\w-]+)"/g)) {
-  check(ids.has(target), `Odnośnik „#${target}” nie ma celu na stronie.`);
+// --- Podstrony sprzedażowe ---
+check(/appType:\s*'mpa'/.test(viteConfig), 'Vite nie jest w trybie wielostronicowym (appType: mpa).');
+check(/oferta\/index\.html/.test(viteConfig) && /realizacje\/index\.html/.test(viteConfig), 'Konfiguracja Vite nie buduje obu podstron jako osobnych wejść.');
+check(!/RewriteRule \^\([^)]*\b(oferta|realizacje)\b/i.test(securityHeaders), '.htaccess przekierowuje /oferta lub /realizacje na index.html zamiast serwować własną podstronę.');
+
+check(count(offer, /<article class="package/gi) === 3, 'Strona oferty musi opisywać trzy zakresy pracy.');
+check(count(offer, /class="tick-list"/gi) >= 3, 'Każdy zakres na stronie oferty musi wypisywać, co wchodzi w cenę.');
+check(/class="cross-list"/.test(offer), 'Strona oferty nie wypisuje wprost, czego zakres nie obejmuje.');
+check(/od 600 zł/.test(offer), 'Strona oferty nie zawiera potwierdzonej ceny wejściowej.');
+check(!/\d[\d\s]*(?:–|-)\s*\d[\d\s]*\s*zł/.test(offer), 'Strona oferty zawiera widełki cenowe, których właściciel nie potwierdził.');
+check(/3 do 21 dni/.test(offer), 'Strona oferty nie podaje potwierdzonego terminu realizacji.');
+check(/kupujesz na własne konto|na własne konto/i.test(offer), 'Strona oferty nie wyjaśnia, że domena i hosting są kupowane na konto klienta.');
+check(count(offer, /<details class="faq-item"/gi) >= 4, 'Strona oferty musi zawierać co najmniej cztery pytania.');
+
+const demoSlugs = ['buddem', 'buddem-bez-animacji', 'krojnia', 'muzeum', 'muzeum-plakat', 'glow-room', 'drivenow', 'ostoja', 'meridian', 'perspektywa', 'piwonia', 'osada-pod-grania', 'puls', 'kwartal-lipowy'];
+for (const slug of demoSlugs) {
+  check(new RegExp(`href="${productionUrl}${slug}"`).test(works), `Galeria realizacji nie linkuje do dema „${slug}”.`);
 }
+check(count(works, /<article class="project-card"/gi) === demoSlugs.length, `Galeria realizacji musi zawierać dokładnie ${demoSlugs.length} kart.`);
+check(count(works, /class="project-card__story"/gi) === demoSlugs.length, 'Każda realizacja musi opisywać zamysł, decyzję i efekt.');
+check(/marka fikcyjna/i.test(works) && /class="disclaimer"/.test(works), 'Galeria realizacji nie zaznacza wprost, że wszystkie marki są zmyślone.');
+check(/href="\/realizacje\/"/.test(html) && /href="\/oferta\/"/.test(html), 'Strona główna nie prowadzi do obu podstron.');
+check(!/href="\/uslugi"|href="\/realizacje"(?!\/)/.test(`${html}\n${offer}\n${works}`), 'W nawigacji pozostał stary adres sekcji zamiast adresu podstrony.');
 
 check(/Allow:\s*\//i.test(robots) && !/Disallow:\s*\//i.test(robots), 'robots.txt nie zezwala na indeksowanie strony produkcyjnej.');
 check(new RegExp(`Sitemap:\\s*${productionUrl}sitemap\\.xml`, 'i').test(robots), 'robots.txt nie wskazuje produkcyjnej sitemapy.');
-check(new RegExp(`<loc>${productionUrl}</loc>`, 'i').test(sitemap), 'Sitemap nie wskazuje strony produkcyjnej.');
-check(count(sitemap, /<url>/gi) === 1, 'Sitemap powinna zawierać wyłącznie indeksowaną stronę główną.');
+for (const page of pages) {
+  check(sitemap.includes(`<loc>${page.url}</loc>`), `Sitemap nie wskazuje strony „${page.name}”.`);
+}
+check(count(sitemap, /<url>/gi) === pages.length, `Sitemap powinna zawierać dokładnie ${pages.length} indeksowane adresy.`);
 check(/noindex,nofollow/i.test(thanks), 'Strona podziękowania musi mieć noindex,nofollow.');
 check(/noindex,nofollow/i.test(notFound) && /Błąd 404/i.test(notFound), 'Własna strona 404 nie ma noindex lub prawidłowej treści.');
 check(!/nieoficjalny prototyp/i.test(thanks), 'Strona podziękowania nadal opisuje formularz jako prototyp.');
@@ -156,6 +202,19 @@ for (const file of [
   'public/assets/personal-hero.svg',
   'public/assets/og-card.svg',
   'public/assets/og-card.png',
+  'public/assets/project-buddem.svg',
+  'public/assets/project-buddem-static.svg',
+  'public/assets/project-krojnia.svg',
+  'public/assets/project-muzeum.svg',
+  'public/assets/project-muzeum-plakat.svg',
+  'public/assets/project-glow-room.svg',
+  'public/assets/project-drivenow.svg',
+  'public/assets/project-ostoja.svg',
+  'public/assets/project-meridian.svg',
+  'public/assets/project-perspektywa.svg',
+  'oferta/index.html',
+  'realizacje/index.html',
+  'vite.config.js',
   'scripts/check-powershell.ps1',
   'kontakt.config.example.php',
   'README.md',
@@ -174,6 +233,9 @@ if (failures.length) {
 }
 
 console.log('Walidacja treści i struktury: OK');
+console.log(`- ${pages.length} indeksowane strony: własny canonical, og:url, opis i jeden h1: OK`);
+console.log('- oferta: 3 zakresy z listą wykluczeń, tylko potwierdzone liczby: OK');
+console.log(`- realizacje: ${demoSlugs.length} dem, każde z opisem decyzji i oznaczeniem marki fikcyjnej: OK`);
 console.log('- produkcyjne SEO, sitemap, robots i brak placeholderów: OK');
 console.log('- 3 usługi, co najmniej 4 pytania, polityka prywatności i backend PHP formularza: OK');
 console.log('- odbiorca e-mail, limity pól, honeypot i nagłówki bezpieczeństwa w .htaccess: OK');

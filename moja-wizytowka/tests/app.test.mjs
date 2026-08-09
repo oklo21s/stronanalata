@@ -1,7 +1,30 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { Window } from 'happy-dom';
-import { initNavigation, initReveal, initTheme } from '../src/app.js';
+import { initNavigation, initReveal, initRouting, initStickyCta, initTheme } from '../src/app.js';
+
+// Strona ma trzy adresy z własnym plikiem HTML (/, /oferta/, /realizacje/)
+// oraz kilka adresów będących sekcjami strony głównej. Router musi je
+// rozróżniać, inaczej odnośnik do podstrony zamienia się w martwy klik.
+function createRoutedPage(url) {
+  const window = new Window({ url });
+  window.document.body.innerHTML = `
+    <header class="site-header"></header>
+    <nav id="site-nav">
+      <a id="do-uslug" href="/uslugi">Usługi</a>
+      <a id="do-oferty" href="/oferta/">Oferta</a>
+    </nav>
+    <section id="uslugi">Usługi</section>
+  `;
+  initRouting(window.document);
+  return window;
+}
+
+function clickAndReportDefault(window, id) {
+  const event = new window.MouseEvent('click', { bubbles: true, cancelable: true, button: 0 });
+  window.document.getElementById(id).dispatchEvent(event);
+  return event.defaultPrevented;
+}
 
 function createThemePage() {
   const window = new Window({ url: 'https://moja-wizytowka.local/' });
@@ -106,4 +129,26 @@ test('duża parzysta liczba przełączeń pozostawia menu zamknięte', () => {
   for (let index = 0; index < 10_000; index += 1) button.click();
   assert.equal(button.getAttribute('aria-expanded'), 'false');
   assert.equal(window.document.querySelector('#site-nav').classList.contains('is-open'), false);
+});
+
+test('na stronie głównej odnośnik do sekcji jest obsługiwany przez router', () => {
+  const window = createRoutedPage('https://stronanalata.pl/');
+  assert.equal(clickAndReportDefault(window, 'do-uslug'), true);
+});
+
+test('odnośnik do podstrony z własnym plikiem HTML zostaje przy przeglądarce', () => {
+  const window = createRoutedPage('https://stronanalata.pl/');
+  assert.equal(clickAndReportDefault(window, 'do-oferty'), false);
+});
+
+test('na podstronie router nie przechwytuje odnośników do sekcji strony głównej', () => {
+  const window = createRoutedPage('https://stronanalata.pl/oferta/');
+  assert.equal(clickAndReportDefault(window, 'do-uslug'), false);
+});
+
+test('pływający przycisk działa na podstronie bez sekcji kontaktu', () => {
+  const window = new Window({ url: 'https://stronanalata.pl/oferta/' });
+  window.document.body.innerHTML = '<a class="sticky-cta" href="/kontakt">Napisz</a><footer class="site-footer"></footer>';
+  assert.doesNotThrow(() => initStickyCta(window.document));
+  assert.equal(typeof initStickyCta(window.document), 'function');
 });

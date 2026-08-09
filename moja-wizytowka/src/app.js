@@ -60,15 +60,21 @@ export function initRouting(root = document) {
 
   // Czyste adresy sekcji zamiast kotwic #. Serwer (.htaccess) serwuje na nich
   // index.html, a poniższy kod przewija do właściwej sekcji i aktualizuje adres.
+  // /oferta i /realizacje to osobne pliki HTML, więc świadomie nie ma ich tutaj —
+  // przeglądarka ma je otworzyć normalnie, a nie przewijać stronę główną.
   const routes = {
     '/': 'top',
     '/o-mnie': 'o-mnie',
     '/uslugi': 'uslugi',
     '/proces': 'proces',
-    '/realizacje': 'realizacje',
     '/faq': 'faq',
     '/kontakt': 'kontakt',
   };
+
+  // Przechwytujemy kliknięcia wyłącznie wtedy, gdy sekcje są na bieżącej stronie.
+  // Na podstronach ten sam odnośnik (np. /uslugi) ma przeładować stronę główną,
+  // a nie próbować przewinąć do sekcji, której tam nie ma.
+  const onHomePage = () => view.location.pathname in routes;
 
   const header = root.querySelector('.site-header');
   const reduced = view.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
@@ -90,6 +96,7 @@ export function initRouting(root = document) {
 
   const onClick = (event) => {
     if (event.defaultPrevented || event.button !== 0) return;
+    if (!onHomePage()) return;
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     const anchor = event.target.closest?.('a[href]');
     if (!anchor || anchor.target === '_blank' || anchor.hasAttribute('download')) return;
@@ -123,15 +130,18 @@ export function initRouting(root = document) {
 
 export function initStickyCta(root = document) {
   const cta = root.querySelector('.sticky-cta');
-  const contact = root.querySelector('#kontakt');
-  if (!cta || !contact) return () => {};
+  if (!cta) return () => {};
 
   const view = root.defaultView ?? globalThis.window;
   if (typeof view?.IntersectionObserver !== 'function') return () => {};
 
   // Chowamy pływający przycisk, gdy widać sekcję kontaktu lub stopkę —
   // żeby nie zasłaniał formularza ani treści na dole strony.
+  // Na podstronach nie ma sekcji #kontakt, więc wystarcza sama stopka.
+  const contact = root.querySelector('#kontakt');
   const footer = root.querySelector('.site-footer');
+  if (!contact && !footer) return () => {};
+
   const visible = new Set();
   const observer = new view.IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -141,7 +151,7 @@ export function initStickyCta(root = document) {
     cta.classList.toggle('is-hidden', visible.size > 0);
   }, { rootMargin: '0px 0px -35% 0px' });
 
-  observer.observe(contact);
+  if (contact) observer.observe(contact);
   if (footer) observer.observe(footer);
   return () => observer.disconnect();
 }
